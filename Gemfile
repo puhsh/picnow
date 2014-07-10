@@ -9,6 +9,10 @@ gem 'pg', '0.17.1'
 # Unicorn
 gem 'unicorn', '4.8.2'
 
+# Deployments
+gem 'mina', '0.3.0'
+gem 'mina_hipchat', '0.0.4'
+
 # Assets
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
