@@ -3,4 +3,6 @@
 #= require foundation
 #= require turbolinks
 
-$(function(){ $(document).foundation(); });
+$(() -> 
+  $(document).foundation()
+)
