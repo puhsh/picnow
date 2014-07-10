@@ -14,11 +14,12 @@ gem 'mina', '0.3.0'
 gem 'mina_hipchat', '0.0.4'
 
 # Assets
-gem 'sass-rails', '~> 4.0.3'
-gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'foundation-rails', '5.3.0.1'
 gem 'jquery-rails'
+gem 'sass-rails', '~> 4.0.3'
 gem 'turbolinks'
+gem 'uglifier', '>= 1.3.0'
 
 # Spring
 gem 'spring', group: :development
