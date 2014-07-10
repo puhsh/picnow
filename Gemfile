@@ -30,3 +30,4 @@ gem 'factory_girl_rails', '4.4.1'
 # Third Party - Development
 gem 'lunchy', '0.8.0', group: :development 
 gem 'pry-rails', '0.3.2', group: :development
+gem 'guard-rspec', '4.2.10', group: :development
