@@ -23,4 +23,6 @@ gem 'spring', group: :development
 gem 'rspec-rails', '2.14.1'
 gem 'factory_girl_rails', '4.4.1'
 
-# Third Party
+# Third Party - Development
+gem 'lunchy', '0.8.0', group: :development 
+gem 'pry-rails', '0.3.2', group: :development
