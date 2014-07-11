@@ -29,6 +29,7 @@ gem 'rspec-rails', '2.14.1'
 gem 'factory_girl_rails', '4.4.1'
 
 # Third Party - Development
+gem 'devise', '3.2.4'
+gem 'guard-rspec', '4.2.10', group: :development
 gem 'lunchy', '0.8.0', group: :development 
 gem 'pry-rails', '0.3.2', group: :development
-gem 'guard-rspec', '4.2.10', group: :development
