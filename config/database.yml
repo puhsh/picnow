@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+development:
+  <<: *default
+  database: pic_now_development
+test:
+  <<: *default
+  database: pic_now_test
+production:
+  <<: *default
+  database: pic_now_production
+  username: pic_now
+  password: <%= ENV['PIC_NOW_DATABASE_PASSWORD'] %>
