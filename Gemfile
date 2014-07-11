@@ -13,6 +13,9 @@ gem 'unicorn', '4.8.2'
 gem 'mina', '0.3.0'
 gem 'mina_hipchat', '0.0.4'
 
+# Paperclip
+gem 'paperclip', '4.2.0'
+
 # Assets
 gem 'coffee-rails', '~> 4.0.0'
 gem 'foundation-rails', '5.3.0.1'
