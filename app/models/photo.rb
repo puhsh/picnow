@@ -1,8 +1,8 @@
-class GroupUser < ActiveRecord::Base
+class Photo < ActiveRecord::Base
   # Relations
-  belongs_to :group
   belongs_to :user
-
+  belongs_to :group
+  
   # Callbacks
   
   # Validations

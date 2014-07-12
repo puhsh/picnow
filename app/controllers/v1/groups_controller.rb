@@ -1,8 +1,7 @@
 class V1::GroupsController < V1::ApiController
   def index
     @user = User.find(params[:user_id])
-    @groups = @user.groups if @user
-
+    @groups = @user.groups
     render json: @groups
   end
 
