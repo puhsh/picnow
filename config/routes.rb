@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # API routes
   namespace :v1 do
     resources :users, only: [:show, :create] do
-      resources :groups, only: [:index, :show]
+      resources :groups, only: [:index, :show, :create]
     end
   end
 
