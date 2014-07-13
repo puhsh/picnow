@@ -15,9 +15,11 @@ class Photo < ActiveRecord::Base
   belongs_to :group
   
   # Callbacks
-  after_commit :touch_group_last_photo_sent_at, on: :create
+  after_commit :touch_group_last_photo_sent_at
   
   # Validations
+  validates :user, presence: true
+  validates :group, presence: true
   validates_attachment_content_type :image, content_type: ['image/jpeg', 'image/jpg', 'image/png']
   
   # Scopes
@@ -31,6 +33,6 @@ class Photo < ActiveRecord::Base
   #
   # Returns
   def touch_group_last_photo_sent_at
-    self.group.update_attributes(last_photo_sent_at: self.created_at)
+    self.group.update_column(:last_photo_sent_at, self.created_at)
   end
 end

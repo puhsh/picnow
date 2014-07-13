@@ -6,6 +6,8 @@ class GroupUser < ActiveRecord::Base
   # Callbacks
   
   # Validations
+  validates :user, presence: true
+  validates :group, presence: true
   
   # Scopes
 
