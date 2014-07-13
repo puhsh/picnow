@@ -3,9 +3,11 @@ class Photo < ActiveRecord::Base
 
   # Paperclip
   has_attached_file :image,
-                    styles: { original: '1280x1280#', medium: '640x640#', small: '320x320#' },
+                    styles: { large: '1280x1280#', medium: '640x640#', small: '320x320#' },
                     s3_permissions: :public_read,
-                    path: 'photos/:id.:extension'
+                    s3_headers: { 'Expires' => 10.years.from_now.httpdate },
+                    path: 'photos/:id-:style-:fingerprint.:extension',
+                    use_timestamp: false
 
   # Relations
   belongs_to :user
@@ -19,4 +21,16 @@ class Photo < ActiveRecord::Base
   # Scopes
   
   # Methods
+
+  # Public: Calculates a hash of image urls per size
+   #
+   # Returns a hash
+   def image_urls
+     {
+      large: image.url(:large),
+      original: image.url,
+      medium: image.url(:medium),
+      small: image.url(:small)
+     }
+   end
 end
