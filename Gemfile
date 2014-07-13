@@ -16,6 +16,9 @@ gem 'mina_hipchat', '0.0.4'
 # Paperclip
 gem 'paperclip', '4.2.0'
 
+# AWS
+gem 'aws-sdk', '1.47.0'
+
 # Assets
 gem 'coffee-rails', '~> 4.0.0'
 gem 'foundation-rails', '5.3.0.1'
