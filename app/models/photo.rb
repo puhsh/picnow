@@ -23,14 +23,14 @@ class Photo < ActiveRecord::Base
   # Methods
 
   # Public: Calculates a hash of image urls per size
-   #
-   # Returns a hash
-   def image_urls
-     {
+  #
+  # Returns a hash
+  def image_urls
+    {
       large: image.url(:large),
       original: image.url,
       medium: image.url(:medium),
       small: image.url(:small)
-     }
-   end
+    }
+  end
 end
