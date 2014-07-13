@@ -1,5 +1,6 @@
 class Photo < ActiveRecord::Base
   include Pointable
+  include Sizeable
 
   # Paperclip
   has_attached_file :image,
@@ -23,18 +24,6 @@ class Photo < ActiveRecord::Base
   default_scope -> { order(created_at: :desc).limit(25) }
   
   # Methods
-
-  # Public: Calculates a hash of image urls per size
-  #
-  # Returns a hash
-  def image_urls
-    {
-      large: image.url(:large),
-      original: image.url,
-      medium: image.url(:medium),
-      small: image.url(:small)
-    }
-  end
 
   protected
 
