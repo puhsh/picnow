@@ -1,7 +1,7 @@
 class V1::GroupsController < V1::ApiController
   def index
     @user = User.find(params[:user_id])
-    @groups = @user.groups.includes(:users, :photos)
+    @groups = @user.groups.includes(:users, :photos).order('groups.last_photo_sent_at desc')
     render json: @groups
   end
 
