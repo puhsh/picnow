@@ -17,9 +17,10 @@ class Photo < ActiveRecord::Base
   after_commit :touch_group_last_photo_sent_at, on: :create
   
   # Validations
-   validates_attachment_content_type :image, content_type: ['image/jpeg', 'image/jpg', 'image/png']
+  validates_attachment_content_type :image, content_type: ['image/jpeg', 'image/jpg', 'image/png']
   
   # Scopes
+  default_scope -> { order(created_at: :desc).limit(25) }
   
   # Methods
 
