@@ -3,8 +3,9 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
 
-set :domain, ''
-set :deploy_to, '/var/www/'
+set :user, 'puhsh'
+set :domain, '50.23.243.61'
+set :deploy_to, '/var/www/picnow/'
 set :repository, 'git@github.com:puhsh/picnow.git'
 set :branch, 'master'
 set :shared_paths, ['config/database.yml', 'log']
