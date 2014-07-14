@@ -17,7 +17,7 @@ test:
 production:
   <<: *default
   database: pic_now_production
-  username: pic_now
+  username: picnow
   host: picnow.cnjjmtsvoavh.us-east-1.rds.amazonaws.com
   port: 5432
   password: <%= ENV['PIC_NOW_DATABASE_PASSWORD'] %>
