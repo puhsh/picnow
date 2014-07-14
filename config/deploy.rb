@@ -8,7 +8,7 @@ set :domain, '50.23.243.61'
 set :deploy_to, '/var/www/picnow/'
 set :repository, 'git@github.com:puhsh/picnow.git'
 set :branch, 'master'
-set :shared_paths, ['config/database.yml', 'log']
+set :shared_paths, %w{log tmp/pids tmp/sockets vendor/assets public/system config/database.yml}
 set :hipchat_auth_token, ''
 set :hipchat_rooms, ['Fun Town']
 set :hipchat_from, 'Puhshbot'
@@ -38,6 +38,7 @@ task :deploy => :environment do
     invoke :'rails:assets_precompile'
 
     to :launch do
+      # queue 'kill -s USR2 `cat /var/www/picnow/shared/tmp/pids/unicorn.picnow.pid`'
     end
   end
 end
