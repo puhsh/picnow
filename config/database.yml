@@ -4,9 +4,11 @@ default: &default
   pool: 5
 development:
   <<: *default
+  username: pic_now
   database: pic_now_development
 test:
   <<: *default
+  username: pic_now
   database: pic_now_test
 production:
   <<: *default
