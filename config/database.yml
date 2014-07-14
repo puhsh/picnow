@@ -6,13 +6,13 @@ development:
   <<: *default
   host: localhost
   username: pic_now
-  passowrd:
+  password:
   database: pic_now_development
 test:
   <<: *default
   host: localhost
   username: pic_now
-  passowrd:
+  password:
   database: pic_now_test
 production:
   <<: *default
