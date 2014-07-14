@@ -13,6 +13,10 @@ set :hipchat_auth_token, ''
 set :hipchat_rooms, ['Fun Town']
 set :hipchat_from, 'Puhshbot'
 
+task :environment do
+  invoke 'rvm:use[2.1.2@picnow]'
+end
+
 task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/log"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
@@ -30,7 +34,7 @@ task :deploy => :environment do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
-    invoke :'rails:db_migrate'
+    # invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
 
     to :launch do
