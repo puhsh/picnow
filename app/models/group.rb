@@ -7,6 +7,7 @@ class Group < ActiveRecord::Base
   # Callbacks
   
   # Validations
+  validates :name, presence: true, length: { maximum: 20 }
   
   # Scopes
 
