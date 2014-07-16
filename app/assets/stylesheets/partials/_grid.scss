@@ -7,6 +7,7 @@ body {
 }
 
 div#jumbo {
+  margin-top: 50px;
   h3 {
     font-weight: bold;
     @media #{$medium-only} {
