@@ -3,12 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="copyright" content="<%= Date.today.year %> Puhsh Inc" />
 
     <title><%= content_for?(:title) ? yield(:title) : "PICNOW" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
+
     <%= favicon_link_tag 'favicon.ico' %>
     <script type="text/javascript" src="//use.typekit.net/fum8gif.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -16,11 +18,8 @@
 
   <body>
     <section class="container">
-
-      <div class="row">
-        <%= yield %>
-        <%= javascript_include_tag "application" %>
-      </div>
+      <%= yield %>
+      <%= javascript_include_tag "application" %>
     </section>
   </body>
 </html>
