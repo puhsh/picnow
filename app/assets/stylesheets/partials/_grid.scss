@@ -17,9 +17,12 @@ div#jumbo {
 div#logo  {
   img {
     width: 90%;
+    height: auto;
   }
 }
 
 div#app-download {
-  padding-top: rem-calc(115);
+  img {
+    height: auto;
+  }
 }
