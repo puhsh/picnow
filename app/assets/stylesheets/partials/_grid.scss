@@ -4,6 +4,11 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+    -webkit-animation: fadein 1s;
+    -moz-animation: fadein 1s; /* Firefox */
+    -ms-animation: fadein 1s; /* Internet Explorer */
+    -o-animation: fadein 1s; /* Opera */
+    animation: fadein 1s;
 }
 
 div#jumbo {
@@ -42,4 +47,9 @@ div#app-download {
     height: auto;
     width: 100%;
   }
+}
+
+@-webkit-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
