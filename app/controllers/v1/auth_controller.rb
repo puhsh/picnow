@@ -8,6 +8,7 @@ class V1::AuthController < V1::ApiController
     resource = User.find_by_email(params[:user][:email]) || User.find_by_username(params[:user][:username])
 
     if resource && resource.valid_password?(params[:user][:password])
+      warden.authenticate! scope: 'user'
       sign_in 'user', resource
       render json: resource.as_json.merge({access_token: resource.access_token})
     else
