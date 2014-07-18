@@ -1,4 +1,6 @@
 class V1::UsersController < V1::ApiController
+  after_filter :set_csrf_header, only: [:create]
+
   def index
     if params[:group_id]
       @group = Group.includes(:users).find(params[:group_id])
