@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_many :photos
   has_many :comments, dependent: :destroy
   has_many :devices, dependent: :destroy
+  has_many :invites
+  has_one :accepted_invite, class_name: 'Invite', foreign_key: 'joined_user_id'
   
   # Callbacks
   

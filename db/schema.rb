@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140718013553) do
+ActiveRecord::Schema.define(version: 20140718120732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,17 @@ ActiveRecord::Schema.define(version: 20140718013553) do
     t.datetime "updated_at"
     t.string   "name",               default: "", null: false
   end
+
+  create_table "invites", force: true do |t|
+    t.integer  "user_id"
+    t.string   "to",             default: "", null: false
+    t.integer  "joined_user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "invites", ["joined_user_id"], name: "index_invites_on_joined_user_id", using: :btree
+  add_index "invites", ["user_id"], name: "index_invites_on_user_id", using: :btree
 
   create_table "photos", force: true do |t|
     t.integer  "user_id"
