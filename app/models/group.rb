@@ -18,6 +18,6 @@ class Group < ActiveRecord::Base
   #
   # Returns an array of Comment and Photo objects
   def activity
-    self.photos
+    (self.photos + self.comments).sort_by(&:created_at).reverse
   end
 end
