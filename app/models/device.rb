@@ -16,7 +16,7 @@ class Device < ActiveRecord::Base
 
   protected
 
-  # Protected: Cleans up device tokens
+  # Protected: Cleans up device tokens so they dont have random spaces
   #
   # Returns a sanitized token
   def sanitize_token
