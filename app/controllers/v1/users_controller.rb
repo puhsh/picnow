@@ -1,4 +1,5 @@
 class V1::UsersController < V1::ApiController
+  before_filter :verify_access_token, except: [:create]
   after_filter :set_csrf_header, only: [:create]
 
   def index

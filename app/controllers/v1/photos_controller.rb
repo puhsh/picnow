@@ -1,4 +1,6 @@
 class V1::PhotosController < ApplicationController
+  before_filter :verify_access_token
+
   def index
     @group = Group.includes({photos: :user}).find(params[:group_id])
     @photos = @group.photos

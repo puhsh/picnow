@@ -1,4 +1,6 @@
 class V1::GroupsController < V1::ApiController
+  before_filter :verify_access_token
+
   def index
     @user = User.find(params[:user_id])
     @groups = @user.groups.order(last_photo_sent_at: :desc)
