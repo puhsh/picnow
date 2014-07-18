@@ -27,6 +27,6 @@ module PicNow
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.filter_parameters += [:password, :password_confirmation, :access_token]
+    config.filter_parameters += [:password, :password_confirmation, :token]
   end
 end

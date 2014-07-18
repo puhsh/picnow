@@ -15,7 +15,8 @@ class V1::UsersController < V1::ApiController
   def create
     @user = User.new(params[:user])
     if @user.save
-      render json: @user
+      @user.generate_access_token!
+      render json: @user.as_json.merge({access_token: @user.access_token})
     else
       unprocessable_entity!({from_warden: true})
     end

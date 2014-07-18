@@ -9,13 +9,14 @@ class User < ActiveRecord::Base
                     use_timestamp: false
 
   # Relations
-  has_many :group_users
+  has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
-  has_many :photos
+  has_many :photos, dependent: :nullify
   has_many :comments, dependent: :destroy
   has_many :devices, dependent: :destroy
-  has_many :invites
-  has_one :accepted_invite, class_name: 'Invite', foreign_key: 'joined_user_id'
+  has_many :invites, dependent: :nullify
+  has_one :accepted_invite, class_name: 'Invite', foreign_key: 'joined_user_id', dependent: :destroy
+  has_one :access_token, dependent: :destroy
   
   # Callbacks
   
@@ -39,5 +40,12 @@ class User < ActiveRecord::Base
   # Returns a boolean
   def valid_age?
     self.date_of_birth < 13.years.ago
+  end
+
+  # Public: Generates an access token for a user
+  #
+  # Returns an AccessToken
+  def generate_access_token!
+    AccessToken.create(user: self, token: SecureRandom.hex)
   end
 end
