@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       end
 
       resources :photos, only: [:create]
+      resources :devices, only: [:create]
+      resources :invites, only: [:create]
     end
   end
 
