@@ -31,6 +31,10 @@ class V1::ApiController < ActionController::Metal
     render json: { error: 'Forbidden' }, status: :forbidden
   end
 
+  def unauthorized!(resource = nil)
+    render json: { error: 'Unauthorized' }, status: :unauthorized
+  end
+
   def json_request?
     request.format.json?
   end
