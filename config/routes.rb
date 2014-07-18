@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   namespace :v1 do
     resources :users, only: [:show, :create] do
       resources :groups, only: [:index, :show, :create] do
-        resources :photos, only: [:index]
         resources :users, only: [:index]
+
+        member do 
+          get :activity
+        end
       end
       resources :photos, only: [:create]
     end

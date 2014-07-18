@@ -12,4 +12,11 @@ class Group < ActiveRecord::Base
   # Scopes
 
   # Methods
+  
+  # Public: Gets the activity for a given group
+  #
+  # Returns an array of Comment and Photo objects
+  def activity
+    self.photos
+  end
 end

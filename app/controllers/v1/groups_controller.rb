@@ -18,4 +18,10 @@ class V1::GroupsController < V1::ApiController
       unprocessable_entity!
     end
   end
+
+  def activity
+    @group = Group.includes({photos: :user}).find(params[:id])
+    @activity = @group.activity
+    render json: @activity
+  end
 end
