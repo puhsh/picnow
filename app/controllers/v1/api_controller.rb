@@ -17,7 +17,7 @@ class V1::ApiController < ActionController::Metal
   protect_from_forgery with: :null_session, if: :json_request?
 
   def verify_access_token
-    forbidden! unless (current_user && params[:token] && current_user.access_token.token == params[:token]) || params[:debug]
+    forbidden! unless (current_user && params[:token] && current_user.access_token.token == params[:token]) || bypass_auth?
   end
 
   protected
@@ -41,5 +41,9 @@ class V1::ApiController < ActionController::Metal
 
   def set_csrf_header
     response.headers['X-CSRF-Token'] = form_authenticity_token
+  end
+
+  def bypass_auth?
+    Rails.env.development? && params[:debug]
   end
 end
