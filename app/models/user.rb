@@ -22,9 +22,8 @@ class User < ActiveRecord::Base
   
   # Validations
   validates :username, presence: true, uniqueness: true
-  validates :email, presence: true, uniqueness: true
-  validates :phone_number, presence: true, uniqueness: true
-  validates :date_of_birth, presence: true
+  validates :email, uniqueness: true
+  validates :phone_number, uniqueness: true
   validates_attachment_content_type :avatar, content_type: ['image/jpeg', 'image/jpg', 'image/png']
   
   # Scopes
