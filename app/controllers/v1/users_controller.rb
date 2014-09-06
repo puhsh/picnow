@@ -20,6 +20,7 @@ class V1::UsersController < V1::ApiController
     @user = User.new(params[:user])
     if @user.save
       @user.generate_access_token!
+      sign_in 'user', @user
       render json: @user.as_json.merge({access_token: @user.access_token})
     else
       unprocessable_entity!({from_warden: true})
