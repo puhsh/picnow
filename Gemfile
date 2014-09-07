@@ -43,4 +43,5 @@ gem 'test_after_commit', '0.2.4', group: [:test]
 
 # Third Party
 gem 'active_model_serializers', '0.9.0.alpha1'
+gem 'rails_warden', '0.5.7'
 gem 'symbolize', '4.4.1'

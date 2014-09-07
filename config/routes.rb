@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   namespace :v1 do
     post 'auth', to: 'auth#create'
 
-    resources :users, only: [:show, :create] do
+    resources :users, only: [:show, :create, :update] do
 
       resources :groups, only: [:index, :show, :create] do
         resources :users, only: [:index]

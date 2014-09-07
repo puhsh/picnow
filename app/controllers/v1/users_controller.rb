@@ -21,7 +21,6 @@ class V1::UsersController < V1::ApiController
     if @user.save
       @user.generate_access_token!
       sign_in :user, @user
-      reset_session
       render json: @user.as_json.merge({access_token: @user.access_token})
     else
       unprocessable_entity!
