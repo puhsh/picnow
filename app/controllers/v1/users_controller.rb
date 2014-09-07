@@ -17,13 +17,29 @@ class V1::UsersController < V1::ApiController
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
     if @user.save
       @user.generate_access_token!
-      sign_up 'user', @user
+      sign_in :user, @user
+      reset_session
       render json: @user.as_json.merge({access_token: @user.access_token})
     else
-      unprocessable_entity!({from_warden: true})
+      unprocessable_entity!
     end
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      render json: @user
+    else
+      unprocessable_entity!
+    end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:username, :password, :email, :phone_number)
   end
 end

@@ -10,7 +10,7 @@ class V1::AuthController < V1::ApiController
     if resource && resource.valid_password?(params[:user][:password])
       sign_in 'user', resource
       user = UserSerializer.new(resource)
-      render json: user.as_json.merge({access_token: resource.access_token.token})
+      render json: user.as_json.merge({access_token: resource.access_token})
     else
       warden.custom_failure!
       unauthorized!

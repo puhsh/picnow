@@ -4,6 +4,7 @@ class V1::ApiController < ActionController::Metal
   include ActionController::Serialization
   include ActionController::Rendering
   include ActionController::Renderers::All  
+  include ActionController::Redirecting
   include AbstractController::Callbacks
   include AbstractController::Helpers
   include ActionController::ParamsWrapper  
@@ -13,6 +14,9 @@ class V1::ApiController < ActionController::Metal
   include ActionController::Instrumentation
   include Devise::Controllers::Helpers
   include ActionController::RequestForgeryProtection
+  include ActionController::StrongParameters
+  include ActionController::Rescue 
+  include Rails.application.routes.url_helpers
 
   protect_from_forgery with: :null_session, if: :json_request?
 
@@ -23,7 +27,6 @@ class V1::ApiController < ActionController::Metal
   protected
 
   def unprocessable_entity!(opts={})
-    warden.custom_failure! if opts[:from_warden]
     render json: { error: 'Unprocessable entity', meta: opts[:meta] }, status: :unprocessable_entity
   end
 

@@ -29,8 +29,7 @@ class User < ActiveRecord::Base
   # Scopes
 
   # Devise
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :trackable
 
   # Methods
 

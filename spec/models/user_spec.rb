@@ -20,10 +20,10 @@ describe User do
   end
 
   describe '.email' do
-    it 'is required' do
+    it 'is not required' do
       user.email =  nil
       user.save
-      expect(user).to_not be_valid
+      expect(user).to be_valid
     end
 
     it 'must be unique' do
