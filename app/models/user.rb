@@ -57,4 +57,11 @@ class User < ActiveRecord::Base
       tv.code = SecureRandom.hex(3)
     end.save
   end
+
+  # Public: Determines if the user is a verified account
+  #
+  # Returns a boolean
+  def verified_account?
+    self.text_verification.present? && self.text_verification.verified?
+  end
 end
