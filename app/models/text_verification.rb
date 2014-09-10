@@ -3,6 +3,7 @@ class TextVerification < ActiveRecord::Base
   belongs_to :user
   
   # Callbacks
+  after_save :resend_verification_token
   
   # Validations
   
@@ -24,5 +25,16 @@ class TextVerification < ActiveRecord::Base
   # Returns a TextVerification record
   def verify!
     self.update_attributes(confirmed_at: DateTime.now)
+  end
+
+  protected
+  
+  # Protected: Resends the verification code to the user's phone number
+  #
+  # TODO Implement Twilio
+  #
+  # Returns a TextVerification
+  def resend_verification_token
+
   end
 end
