@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe User do
+  it { should have_one(:text_verification) }
+
   let!(:user) { FactoryGirl.build(:user) }
   let!(:user2) { FactoryGirl.build(:user) }
 

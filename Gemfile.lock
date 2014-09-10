@@ -228,7 +228,7 @@ DEPENDENCIES
   rails_warden (= 0.5.7)
   rspec-rails (= 2.14.1)
   sass-rails (~> 4.0.3)
-  shoulda-matchers
+  shoulda-matchers (= 2.7.0)
   spring
   symbolize (= 4.4.1)
   test_after_commit (= 0.2.4)

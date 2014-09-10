@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :invites, dependent: :nullify
   has_one :accepted_invite, class_name: 'Invite', foreign_key: 'joined_user_id', dependent: :destroy
   has_one :access_token, dependent: :destroy
+  has_one :text_verification
   
   # Callbacks
   
