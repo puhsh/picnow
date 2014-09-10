@@ -62,6 +62,6 @@ class User < ActiveRecord::Base
   #
   # Returns a boolean
   def verified_account?
-    self.text_verification.present? && self.text_verification.verified?
+    self.phone_number.present? && self.text_verification.present? && self.text_verification.verified?
   end
 end
