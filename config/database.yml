@@ -10,7 +10,6 @@ development:
   password:
 test:
   <<: *default
-  host: localhost
   database: pic_now_test
   username: pic_now
   password:
