@@ -6,12 +6,10 @@ development:
   <<: *default
   host: localhost
   database: pic_now_development
-  username: pic_now
   password:
 test:
   <<: *default
   database: pic_now_test
-  username: pic_now
   password:
 production:
   <<: *default
