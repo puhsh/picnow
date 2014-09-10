@@ -27,7 +27,7 @@ describe Photo do
   describe '.touch_group_last_photo_sent_at' do 
     it 'sets the group\'s last photo sent at after a photo is created' do
       photo2.save
-      expect(group.reload.last_photo_sent_at).to eql(photo2.created_at)
+      expect(group.reload.last_photo_sent_at).to_not eql(photo.created_at)
     end
   end
 
