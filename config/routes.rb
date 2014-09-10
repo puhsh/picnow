@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :photos, only: [:create]
       resources :devices, only: [:create]
       resources :invites, only: [:create]
+      resources :text_verifications, only: [:create, :update]
     end
   end
 
