@@ -47,4 +47,14 @@ class User < ActiveRecord::Base
   def generate_access_token!
     AccessToken.create(user: self, token: SecureRandom.hex)
   end
+
+  # Public: Generates a text verification for a user
+  #
+  # Returns a TextVerification
+  def generate_text_verification!
+    TextVerification.new.tap do |tv|
+      tv.user = self
+      tv.code = SecureRandom.hex(3)
+    end.save
+  end
 end

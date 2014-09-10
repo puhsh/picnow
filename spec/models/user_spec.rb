@@ -71,4 +71,16 @@ describe User do
       expect(user.reload).to_not be_valid_age
     end
   end
+
+  describe '.generate_text_verification!' do
+    it 'generates a TextVerification record' do
+      user.generate_text_verification!
+      expect(user.reload.text_verification).to_not be_nil
+    end
+
+    it 'sets a code for a TextVerification record' do
+      user.generate_text_verification!
+      expect(user.reload.text_verification.code).to_not be_nil
+    end
+  end
 end
