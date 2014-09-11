@@ -5,7 +5,7 @@ class V1::TextVerificationsController < V1::ApiController
     @user = User.find(params[:user_id])
     if @user
       @user.generate_text_verification!
-      respond_with @user
+      render json: @user
     else
       unprocessable_entity!
     end
@@ -15,7 +15,7 @@ class V1::TextVerificationsController < V1::ApiController
     @user = User.find(params[:user_id])
     if @user && @user.text_verification
       @user.text_verification.save
-      respond_with @user
+      render json: @user
     else
       unprocessable_entity!
     end
