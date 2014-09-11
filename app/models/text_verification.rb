@@ -23,8 +23,10 @@ class TextVerification < ActiveRecord::Base
   # Public: Verifies someone's account
   #
   # Returns a TextVerification record
-  def verify!
-    self.update_attributes(confirmed_at: DateTime.now)
+  def verify!(user, code)
+    if self.user_id == user.id && self.code == code
+      self.update_attributes(confirmed_at: DateTime.now)
+    end
   end
 
   protected
