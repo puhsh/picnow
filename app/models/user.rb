@@ -32,6 +32,9 @@ class User < ActiveRecord::Base
   # Devise
   devise :database_authenticatable, :trackable
 
+  # Third Party
+  phony_normalize :phone_number, default_country_code: 'US'
+
   # Methods
 
   # Public: Determines if a user is of valid age, i.e. they are older than 13
