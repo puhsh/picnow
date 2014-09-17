@@ -3,7 +3,7 @@ class TextVerification < ActiveRecord::Base
   belongs_to :user
   
   # Callbacks
-  after_save :resend_verification_token
+  after_commit :send_verification_code, on: :create
   
   # Validations
   
@@ -29,14 +29,18 @@ class TextVerification < ActiveRecord::Base
     end
   end
 
-  protected
-  
-  # Protected: Resends the verification code to the user's phone number
+  # Public: Resends the verification code to a user
   #
-  # TODO Implement Twilio
+  # Returns nothing
+  def resend_verification_code!
+    self.send_verification_code
+  end
+
+  protected
+
+  # Protected: Sends the verification code to the user's phone number using Twilio
   #
   # Returns a TextVerification
-  def resend_verification_token
-
+  def send_verification_code
   end
 end

@@ -14,7 +14,7 @@ class V1::TextVerificationsController < V1::ApiController
   def update
     @user = User.find(params[:user_id])
     if @user && @user.text_verification
-      @user.text_verification.save
+      @user.resend_verification_code!
       render json: @user
     else
       unprocessable_entity!
