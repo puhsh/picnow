@@ -1,4 +1,7 @@
 class TextVerification < ActiveRecord::Base
+  # Attributes
+  attr_reader :twilio_client
+
   # Relations
   belongs_to :user
   
@@ -34,6 +37,12 @@ class TextVerification < ActiveRecord::Base
   # Returns nothing
   def resend_verification_code!
     self.send_verification_code
+  end
+
+  def twilio_client
+    account_sid = Rails.application.secrets[:twilio]['sid']
+    auth_token = Rails.application.secrets[:twilio]['auth_token']
+    @twilio_client = Twilio::REST::Client.new(account_sid, auth_token)
   end
 
   protected
