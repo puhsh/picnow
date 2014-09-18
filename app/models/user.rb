@@ -22,9 +22,9 @@ class User < ActiveRecord::Base
   # Callbacks
   
   # Validations
-  validates :username, presence: true, uniqueness: true
-  validates :email, uniqueness: true, allow_nil: true, allow_blank: true
-  validates :phone_number, uniqueness: true, allow_nil: true, allow_blank: true
+  validates :username, presence: { message: 'must be legit' }, uniqueness: { message: 'already taken.' }
+  validates :email, presence: { message: 'must be legit.' }, uniqueness: { message: 'already taken.' }
+  validates :phone_number, presence: { message: 'must be legit.' }, uniqueness: { message: 'is already taken.' }
   validates_attachment_content_type :avatar, content_type: ['image/jpeg', 'image/jpg', 'image/png']
   
   # Scopes

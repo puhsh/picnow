@@ -22,10 +22,10 @@ describe User do
   end
 
   describe '.email' do
-    it 'is not required' do
+    it 'is required' do
       user.email =  nil
       user.save
-      expect(user).to be_valid
+      expect(user).to_not be_valid
     end
 
     it 'must be unique' do
@@ -37,10 +37,10 @@ describe User do
   end
 
   describe '.phone_number' do
-    it 'is not required' do
+    it 'is required' do
       user.phone_number =  nil
       user.save
-      expect(user).to be_valid
+      expect(user).to_not be_valid
     end
 
     it 'must be unique' do

@@ -23,7 +23,7 @@ class V1::UsersController < V1::ApiController
       sign_in :user, @user
       render json: @user.as_json.merge({access_token: @user.access_token})
     else
-      unprocessable_entity!
+      unprocessable_entity!({meta: @user.errors.full_messages.first})
     end
   end
 
