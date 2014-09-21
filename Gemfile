@@ -41,12 +41,12 @@ gem 'factory_girl_rails', '4.4.1'
 gem 'devise', '3.2.4'
 gem 'guard-rspec', '4.2.10', group: :development
 gem 'lunchy', '0.8.0', group: :development 
-gem 'pry-rails', '0.3.2', group: :development
 gem 'test_after_commit', '0.2.4', group: [:test]
 
 # Third Party
 gem 'active_model_serializers', '0.9.0.alpha1'
 gem 'phony_rails', '0.6.2'
+gem 'pry-rails', '0.3.2'
 gem 'rails_warden', '0.5.7'
 gem 'shoulda-matchers', '2.7.0'
 gem 'symbolize', '4.4.1'
