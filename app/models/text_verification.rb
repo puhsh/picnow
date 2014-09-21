@@ -49,13 +49,15 @@ class TextVerification < ActiveRecord::Base
   #
   # Returns a Twilio::REST::Message object
   def send_verification_code
-    unless self.verified?
+    if !self.verified?
       to_phone_number = Rails.env.production? ? self.user.phone_number : Rails.application.secrets[:twilio]['valid_to_phone_number']
       self.twilio_client.account.messages.create(
         from: "+#{Rails.application.secrets[:twilio]['phone_number']}",
         to: to_phone_number,
           body: "Your PicNow verification code is #{self.code}. #gorilla"
       )
+    else
+      true
     end
   end
 

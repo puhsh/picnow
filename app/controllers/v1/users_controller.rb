@@ -13,7 +13,7 @@ class V1::UsersController < V1::ApiController
 
   def show
     @user = User.find(params[:id])
-    render json: @user
+    render json: @user, serializer: NewUserSerializer
   end
 
   def create
@@ -21,7 +21,7 @@ class V1::UsersController < V1::ApiController
     if @user.save
       @user.generate_access_token!
       sign_in :user, @user
-      render json: @user.as_json.merge({access_token: @user.reload.access_token, text_verification: @user.reload.text_verification})
+      render json: @user, serializer: NewUserSerializer
     else
       unprocessable_entity!({meta: @user.errors.full_messages.first})
     end

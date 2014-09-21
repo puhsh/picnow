@@ -12,16 +12,23 @@ class V1::TextVerificationsController < V1::ApiController
   end
 
   def update
+    @text_verification = TextVerification.where(id: params[:id], user_id: params[:user_id]).first
     @user = User.find(params[:user_id])
-    @text_verification = TextVerification.find(params[:id])
-    if !@user.present? || !@text_verification.present?
-      unprocessable_entity!
-    elsif params[:code] && @text_verification.verify!(@user, params[:code])
-      render json: @user
-    elsif @user.resend_verification_code!
+    if @user && @text_verification && ( did_verify_user? || resent_code_to_user? )
       render json: @user
     else
       unprocessable_entity!
     end
+  end
+
+
+  private 
+
+  def did_verify_user?
+    params[:code] && @text_verification.verify!(@user, params[:code])
+  end
+
+  def resent_code_to_user?
+    @text_verification.resend_verification_code!
   end
 end
