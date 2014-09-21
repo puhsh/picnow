@@ -19,6 +19,9 @@ gem 'paperclip', '4.2.0'
 # AWS
 gem 'aws-sdk', '1.47.0'
 
+# APN / GCM
+gem 'rpush', '2.0.1', require: true
+
 # Assets
 gem 'coffee-rails', '~> 4.0.0'
 gem 'foundation-rails', '5.3.0.1'
