@@ -3,19 +3,19 @@
  Rpush.configure do |config|
 
   # Supported clients are :active_record and :redis.
-  # config.client = :active_record
+  config.client = :active_record
 
   # Options passed to Redis.new
   # config.redis_options = {}
 
   # Run in the foreground?
-  # config.foreground = false
+  config.foreground = false
 
   # Frequency in seconds to check for new notifications.
-  # config.push_poll = 2
+  config.push_poll = 5
 
   # Frequency in seconds to check for feedback
-  # config.feedback_poll = 60
+  config.feedback_poll = 60
 
   # The maximum number of notifications to load from the store every `push_poll` seconds.
   # If some notifications are still enqueued internally, Rpush will load the batch_size less
@@ -24,7 +24,7 @@
   # config.batch_size = 100
 
   # Path to write PID file. Relative to Rails root unless absolute.
-  # config.pid_file = '/path/to/rpush.pid'
+  config.pid_file = 'tmp/pids/rpush.pid'
 
   # Define a custom logger.
   # config.logger = MyLogger.new
