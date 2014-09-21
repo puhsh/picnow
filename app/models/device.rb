@@ -8,11 +8,26 @@ class Device < ActiveRecord::Base
   before_create :sanitize_token
   
   # Validations
-  validates :token, presence: true, uniqueness: { scope: :user_id }
+  validates :token, presence: true, uniqueness: { scope: :user_id }, allow_nil: true
   
   # Scopes
 
   # Methods
+
+  # Public: Fires a notification to a device
+  #
+  # Returns an Rpush object
+  def fire_notification!(message, event)
+    return unless message && event
+
+    if self.android?
+      self.send_gcm_notification(message)
+    elsif self.ios?
+      self.send_apn_notification(message, event)
+    else
+      nil
+    end
+  end
 
   protected
 
@@ -21,5 +36,27 @@ class Device < ActiveRecord::Base
   # Returns a sanitized token
   def sanitize_token
     self.token = self.token.delete(" ")
+  end
+
+  # Protected: Sends a GCM Notification
+  #
+  # TODO: Implement when we support Android
+  #
+  # Returns an Rpush object
+  def send_gcm_notification(message)
+
+  end
+
+  # Sends an APN notification
+  #
+  # Returns an Rpush object
+  def send_apn_notification(message, event)
+    n = Rpush::Apns::Notification.new
+    n.app = Rpush::Apns::App.find_by_name("pic_now_#{Rails.env}")
+    n.device_token = self.token
+    n.badge = 1
+    n.alert = message
+    n.data = { event: event }
+    n.save!
   end
 end
