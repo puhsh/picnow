@@ -1,7 +1,4 @@
 class TextVerification < ActiveRecord::Base
-  # Attributes
-  attr_reader :twilio_client
-
   # Relations
   belongs_to :user
   
@@ -39,17 +36,23 @@ class TextVerification < ActiveRecord::Base
     self.send_verification_code
   end
 
+  protected
+
   def twilio_client
     account_sid = Rails.application.secrets[:twilio]['sid']
     auth_token = Rails.application.secrets[:twilio]['auth_token']
-    @twilio_client = Twilio::REST::Client.new(account_sid, auth_token)
+    Twilio::REST::Client.new(account_sid, auth_token)
   end
-
-  protected
 
   # Protected: Sends the verification code to the user's phone number using Twilio
   #
   # Returns a TextVerification
   def send_verification_code
+    to_phone_number = Rails.env.production? ? self.user.phone_number : Rails.application.secrets[:twilio]['valid_to_phone_number']
+    self.twilio_client.account.messages.create(
+      from: Rails.application.secrets[:twilio]['phone_number'],
+      to: to_phone_number,
+      body: self.code
+    )
   end
 end
