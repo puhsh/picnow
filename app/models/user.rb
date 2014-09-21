@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_one :text_verification
   
   # Callbacks
+  after_commit :generate_text_verification!, only: :create
   
   # Validations
   validates :username, presence: { message: 'must be legit' }, uniqueness: { message: 'already taken.' }

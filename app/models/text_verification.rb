@@ -3,8 +3,8 @@ class TextVerification < ActiveRecord::Base
   belongs_to :user
   
   # Callbacks
+  before_create :auto_verify
   after_commit :send_verification_code, on: :create
-  after_commit :auto_verifiy, on: :create
   
   # Validations
   
@@ -62,9 +62,9 @@ class TextVerification < ActiveRecord::Base
   # Protected: Autoverifies the account for not production environments
   #
   # Returns nothing
-  def auto_verifiy
-    if !Rails.env.production?
-      self.update_attributes(confirmed_at: DateTime.now)
+  def auto_verify
+    if Rails.env.development?
+      self.confirmed_at = DateTime.now
     end
   end
 end
