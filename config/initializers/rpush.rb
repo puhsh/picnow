@@ -28,7 +28,6 @@
 
   # Define a custom logger.
   # config.logger = MyLogger.new
-
  end
 
 Rpush.reflect do |on|

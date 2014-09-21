@@ -40,5 +40,9 @@ task :deploy => :environment do
     to :launch do
       queue 'kill -s USR2 `cat /var/www/picnow/shared/tmp/pids/unicorn.picnow.pid`'
     end
+
+    to :restart_rpush do
+      queue '"kill -s HUP `cat /var/www/picnow/sharedtmp/pids/rpush.pid`"'
+    end
   end
 end
