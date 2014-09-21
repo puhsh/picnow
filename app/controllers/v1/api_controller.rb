@@ -18,6 +18,8 @@ class V1::ApiController < ActionController::Metal
   include ActionController::Rescue 
   include Rails.application.routes.url_helpers
 
+  before_filter :skip_trackable
+
   protect_from_forgery with: :null_session, if: :json_request?
 
   def verify_access_token
@@ -48,5 +50,9 @@ class V1::ApiController < ActionController::Metal
 
   def bypass_auth?
     Rails.env.development? && params[:debug]
+  end
+
+  def skip_trackable
+    request.env["devise.skip_trackable"] = true
   end
 end

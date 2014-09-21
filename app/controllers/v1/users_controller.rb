@@ -1,6 +1,7 @@
 class V1::UsersController < V1::ApiController
   before_filter :verify_access_token, except: [:create]
   skip_before_filter :verify_authenticity_token, only: [:create], if: :json_request?
+  skip_before_filter :skip_trackable, only: [:create]
   after_filter :set_csrf_header, only: [:create]
 
   def index

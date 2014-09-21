@@ -1,5 +1,6 @@
 class V1::AuthController < V1::ApiController
   skip_before_filter :verify_authenticity_token, only: [:create], if: :json_request?
+  skip_before_filter :skip_trackable, only: [:create]
   after_filter :set_csrf_header, only: [:create]
 
   def create
