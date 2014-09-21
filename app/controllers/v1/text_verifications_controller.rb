@@ -13,8 +13,12 @@ class V1::TextVerificationsController < V1::ApiController
 
   def update
     @user = User.find(params[:user_id])
-    if @user && @user.text_verification
-      @user.resend_verification_code!
+    @text_verification = TextVerification.find(params[:id])
+    if !@user.present? || !@text_verification.present?
+      unprocessable_entity!
+    elsif params[:code] && @text_verification.verify!(@user, params[:code])
+      render json: @user
+    elsif @user.resend_verification_code!
       render json: @user
     else
       unprocessable_entity!

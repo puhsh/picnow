@@ -4,6 +4,7 @@ class TextVerification < ActiveRecord::Base
   
   # Callbacks
   after_commit :send_verification_code, on: :create
+  after_commit :auto_verifiy, on: :create
   
   # Validations
   
@@ -46,13 +47,24 @@ class TextVerification < ActiveRecord::Base
 
   # Protected: Sends the verification code to the user's phone number using Twilio
   #
-  # Returns a TextVerification
+  # Returns a Twilio::REST::Message object
   def send_verification_code
-    to_phone_number = Rails.env.production? ? self.user.phone_number : Rails.application.secrets[:twilio]['valid_to_phone_number']
-    self.twilio_client.account.messages.create(
-      from: "+#{Rails.application.secrets[:twilio]['phone_number']}",
-      to: to_phone_number,
-      body: self.code
-    )
+    unless self.verified?
+      to_phone_number = Rails.env.production? ? self.user.phone_number : Rails.application.secrets[:twilio]['valid_to_phone_number']
+      self.twilio_client.account.messages.create(
+        from: "+#{Rails.application.secrets[:twilio]['phone_number']}",
+        to: to_phone_number,
+          body: self.code
+      )
+    end
+  end
+
+  # Protected: Autoverifies the account for not production environments
+  #
+  # Returns nothing
+  def auto_verifiy
+    if !Rails.env.production?
+      self.update_attributes(confirmed_at: DateTime.now)
+    end
   end
 end
