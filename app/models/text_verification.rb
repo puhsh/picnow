@@ -50,7 +50,7 @@ class TextVerification < ActiveRecord::Base
   def send_verification_code
     to_phone_number = Rails.env.production? ? self.user.phone_number : Rails.application.secrets[:twilio]['valid_to_phone_number']
     self.twilio_client.account.messages.create(
-      from: Rails.application.secrets[:twilio]['phone_number'],
+      from: "+#{Rails.application.secrets[:twilio]['phone_number']}",
       to: to_phone_number,
       body: self.code
     )
