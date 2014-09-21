@@ -29,6 +29,6 @@ class V1::TextVerificationsController < V1::ApiController
   end
 
   def resent_code_to_user?
-    @text_verification.resend_verification_code!
+    !params[:code] && @text_verification.resend_verification_code!
   end
 end
