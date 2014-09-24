@@ -23,8 +23,8 @@ class User < ActiveRecord::Base
   after_commit :generate_text_verification!, on: :create
   
   # Validations
-  validates :username, presence: { message: 'must be legit' }, uniqueness: { message: 'already taken.' }
-  validates :email, presence: { message: 'must be legit.' }, uniqueness: { message: 'already taken.' }
+  validates :username, presence: { message: 'must be legit' }, uniqueness: { message: 'already taken.' }, length: { minimum: 3, message: 'must be at least 3 characters!' }
+  validates :email, presence: { message: 'must be legit.' }, uniqueness: { message: 'already taken.' }, format: { with: /@/, message: 'not legit.' }
   validates :phone_number, presence: { message: 'must be legit.' }, uniqueness: { message: 'is already taken.' }
   validates_attachment_content_type :avatar, content_type: ['image/jpeg', 'image/jpg', 'image/png']
   
