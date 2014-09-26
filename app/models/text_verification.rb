@@ -54,7 +54,7 @@ class TextVerification < ActiveRecord::Base
       self.twilio_client.account.messages.create(
         from: "+#{Rails.application.secrets[:twilio]['phone_number']}",
         to: to_phone_number,
-          body: "Your PicNow verification code is #{self.code}. #gorilla"
+          body: "Your PicNow code is #{self.code}"
       )
     else
       true
