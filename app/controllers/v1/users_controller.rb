@@ -37,9 +37,19 @@ class V1::UsersController < V1::ApiController
     end
   end
 
+  def avatar
+    @user = User.find(params[:id])
+    @user.avatar = params[:avatar]
+    if @user.save
+      render json: @user
+    else
+      unprocessable_entity!
+    end
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:username, :password, :email, :phone_number)
+    params.require(:user).permit(:username, :password, :email, :phone_number, :avatar)
   end
 end

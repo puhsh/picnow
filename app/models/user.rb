@@ -21,12 +21,14 @@ class User < ActiveRecord::Base
   
   # Callbacks
   after_commit :generate_text_verification!, on: :create
+  after_post_process :give_first_point
   
   # Validations
   validates :username, presence: { message: 'must be legit' }, uniqueness: { message: 'already taken.' }, length: { minimum: 3, message: 'must be at least 3 characters!' }
   validates :email, presence: { message: 'must be legit.' }, uniqueness: { message: 'already taken.' }, format: { with: /@/, message: 'not legit.' }
   validates :phone_number, presence: { message: 'must be legit.' }, uniqueness: { message: 'is already taken.' }
   validates_attachment_content_type :avatar, content_type: ['image/jpeg', 'image/jpg', 'image/png']
+
   
   # Scopes
 
@@ -64,5 +66,14 @@ class User < ActiveRecord::Base
   # Returns a boolean
   def verified_account?
     self.phone_number.present? && self.text_verification.present? && self.text_verification.verified?
+  end
+
+  protected
+
+  # Protected: Gives a user their first PicNow point for taking their first selfie
+  # 
+  # Returns true
+  def give_first_point
+    self.increment(:pic_now_count, 1).save
   end
 end

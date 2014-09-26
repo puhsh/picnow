@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
     resources :users, only: [:show, :create, :update] do
 
+      member do
+        post :avatar
+      end
+
       resources :groups, only: [:index, :show, :create] do
         resources :users, only: [:index]
         resources :comments, only: [:create]
