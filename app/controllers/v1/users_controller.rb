@@ -39,7 +39,7 @@ class V1::UsersController < V1::ApiController
 
   def avatar
     @user = User.find(params[:id])
-    if params[:user][:avatar] && @user.update_attributes(params[:user])
+    if params[:user][:avatar] && @user.update_attributes(user_params)
       render json: @user
     else
       unprocessable_entity!
