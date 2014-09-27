@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   #
   # Returns a TextVerification
   def generate_text_verification!
-    TextVerification.create(user: self, code: SecureRandom.hex(3))
+    TextVerification.create(user: self, code: rand(1000...9999))
   end
 
   # Public: Determines if the user is a verified account
