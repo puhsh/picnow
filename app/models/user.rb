@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   
   # Callbacks
   after_commit :generate_text_verification!, on: :create
-  after_post_process :give_first_point
+  before_save :give_first_point
   
   # Validations
   validates :username, presence: { message: 'must be legit' }, uniqueness: { message: 'already taken.' }, length: { minimum: 3, message: 'must be at least 3 characters!' }
@@ -74,6 +74,8 @@ class User < ActiveRecord::Base
   # 
   # Returns true
   def give_first_point
-    self.increment(:pic_now_count, 1).save
+    if self.avatar_file_name_changed? && self.avatar_file_name_was.nil?
+      self.increment(:pic_now_count, 1)
+    end
   end
 end
