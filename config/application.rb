@@ -28,5 +28,6 @@ module PicNow
     # config.i18n.default_locale = :de
 
     config.filter_parameters += [:password, :password_confirmation, :token]
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
   end
 end

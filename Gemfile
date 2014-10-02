@@ -30,6 +30,13 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
+# Ember
+gem 'ember-rails'
+gem 'emblem-rails'
+
+# Bower
+gem 'bower-rails'
+
 # Spring
 gem 'spring', group: :development
 

@@ -13,7 +13,7 @@ class V1::GroupsController < V1::ApiController
   end
 
   def create
-    @group = Group.new(params[:group])
+    @group = Group.new(group_params)
     if @group.save
       render json: @group
     else
@@ -26,4 +26,11 @@ class V1::GroupsController < V1::ApiController
     @activity = @group.activity
     render json: @activity
   end
+
+  protected
+
+  def group_params
+    params.requre(:group).permit(:name)
+  end
+
 end
