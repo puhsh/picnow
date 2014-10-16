@@ -14,6 +14,8 @@ class V1::GroupsController < V1::ApiController
 
   def create
     @group = Group.new(group_params)
+    @user = params[:user_id] ? User.find_by_id(params[:user_id]) : current_user
+    @group.group_users.build(user: @user)
     if @group.save
       render json: @group
     else
@@ -30,7 +32,7 @@ class V1::GroupsController < V1::ApiController
   protected
 
   def group_params
-    params.requre(:group).permit(:name)
+    params.require(:group).permit(:name)
   end
 
 end
