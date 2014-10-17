@@ -16,6 +16,7 @@ class Photo < ActiveRecord::Base
   
   # Callbacks
   after_commit :touch_group_last_photo_sent_at
+  after_commit :notify_group_users, on: :create
   
   # Validations
   validates :user, presence: true
@@ -34,5 +35,12 @@ class Photo < ActiveRecord::Base
   # Returns
   def touch_group_last_photo_sent_at
     self.group.update_column(:last_photo_sent_at, self.created_at)
+  end
+
+  def notify_group_users
+    users = self.group.users.where('users.id != ?', self.user_id)
+    users.each do |user|
+      user.device.fire_notification!("PicNow from #{self.user.username}", :picnow)
+    end
   end
 end
