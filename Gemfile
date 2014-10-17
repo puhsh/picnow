@@ -20,7 +20,7 @@ gem 'paperclip', '4.2.0'
 gem 'aws-sdk', '1.47.0'
 
 # APN / GCM
-gem 'rpush', '2.0.1', require: true
+gem 'rpush', '2.2.0', require: true
 
 # Assets
 gem 'coffee-rails', '~> 4.0.0'
