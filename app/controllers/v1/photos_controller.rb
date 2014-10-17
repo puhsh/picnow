@@ -1,5 +1,6 @@
 class V1::PhotosController < ApplicationController
   before_filter :verify_access_token
+  skip_before_filter :verify_authenticity_token, only: [:create], if: :json_request?
 
   def index
     @group = Group.includes({photos: :user}).find(params[:group_id])
