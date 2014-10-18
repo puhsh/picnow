@@ -7,7 +7,7 @@ class V1::UsersController < V1::ApiController
   def index
     if params[:group_id]
       @group = Group.includes(:users).find(params[:group_id])
-      @users = @group.users
+      @users = @group.users.order(created_at: :asc)
     end
     render json: @users
   end
