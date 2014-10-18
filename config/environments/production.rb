@@ -82,4 +82,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # CDN
+  config.paperclip_defaults = { url: ':s3_alias_url', s3_host_alias: 'cdn.picnow.co' }
 end
