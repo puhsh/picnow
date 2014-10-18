@@ -2,7 +2,8 @@ class V1::DevicesController < V1::ApiController
   before_filter :verify_access_token
 
   def create
-    @device = Device.new(device_params)
+    @user = User.find(params[:user_id])
+    @device = @user.devices.build(device_params)
     if @device.save
       render json: @device
     else
