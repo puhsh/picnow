@@ -46,6 +46,12 @@ class V1::UsersController < V1::ApiController
     end
   end
 
+  def friends
+    @user = User.find(params[:id])
+    @friends = @user.friends
+    render json: @friends
+  end
+
   private
 
   def user_params
