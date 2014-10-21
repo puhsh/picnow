@@ -3,7 +3,7 @@ worker_processes 4
 
 # App Dir
 rails_env = ENV['RAILS_ENV'] || 'production'
-rails_root = '/var/www/picnow/current'
+rails_root = '/var/www/www.picnow.co/current'
 working_directory rails_root
 
 # Load app in master process
