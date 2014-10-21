@@ -44,11 +44,11 @@ task :deploy => :environment do
     invoke :'rails:assets_precompile'
 
     to :launch do
-      queue 'kill -s USR2 `cat /var/www/picnow/shared/tmp/pids/unicorn.picnow.pid`'
+      queue 'kill -s USR2 `cat /var/www/www.picnow.co/shared/tmp/pids/unicorn.picnow.pid`'
     end
 
     to :restart_rpush do
-      queue '"kill -s HUP `cat /var/www/picnow/sharedtmp/pids/rpush.pid`"'
+      queue '"kill -s HUP `cat /var/www/www.picnow.co/sharedtmp/pids/rpush.pid`"'
     end
   end
 end
