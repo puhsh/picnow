@@ -3,9 +3,9 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
 
-set :user, 'puhsh'
-set :domain, '50.23.243.61'
-set :deploy_to, '/var/www/picnow/'
+set :user, 'picnow'
+set :domain, 'ec2-54-172-158-208.compute-1.amazonaws.com'
+set :deploy_to, '/var/www/www.picnow.co/'
 set :repository, 'git@github.com:puhsh/picnow.git'
 set :branch, 'master'
 set :shared_paths, %w{log tmp/pids tmp/sockets vendor/assets public/system config/database.yml}
@@ -38,7 +38,7 @@ task :deploy => :environment do
     invoke :'rails:assets_precompile'
 
     to :launch do
-      queue 'kill -s USR2 `cat /var/www/picnow/shared/tmp/pids/unicorn.picnow.pid`'
+      # queue 'kill -s USR2 `cat /var/www/picnow/shared/tmp/pids/unicorn.picnow.pid`'
     end
 
     to :restart_rpush do
