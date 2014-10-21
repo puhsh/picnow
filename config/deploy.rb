@@ -48,7 +48,7 @@ task :deploy => :environment do
     end
 
     to :restart_rpush do
-      queue '"kill -s HUP `cat /var/www/www.picnow.co/sharedtmp/pids/rpush.pid`"'
+      queue '"kill -s HUP `cat /var/www/www.picnow.co/shared/tmp/pids/rpush.pid`"'
     end
   end
 end
