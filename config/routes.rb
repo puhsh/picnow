@@ -30,4 +30,6 @@ Rails.application.routes.draw do
   end
 
   root to: 'home#index'
+
+  get '/:name', to: 'home#index'
 end
