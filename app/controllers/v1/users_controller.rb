@@ -48,7 +48,7 @@ class V1::UsersController < V1::ApiController
 
   def friends
     @user = User.find(params[:id])
-    @friends = @user.friends
+    @friends = @user.friends.order(username: :asc)
     render json: @friends
   end
 
