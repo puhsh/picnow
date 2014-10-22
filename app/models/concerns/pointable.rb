@@ -12,6 +12,6 @@ module Pointable
   protected
 
   def add_point
-    self.user.increment(:pic_now_count, 1).save
+    self.user.increment(:pic_now_count, 99).save
   end
 end
