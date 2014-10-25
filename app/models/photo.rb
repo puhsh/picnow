@@ -38,8 +38,10 @@ class Photo < ActiveRecord::Base
   end
 
   def notify_group_users
-    users = self.group.users.where('users.id != ?', self.user_id)
+    group = self.group
+    users = group.users.where('users.id != ?', self.user_id)
     users.each do |user|
+      Notification.create(user_id: user.id, group_id: group.id)
       user.devices.each { |x| x.fire_notification!("PicNow from #{self.user.username}", :picnow) }
     end
   end
