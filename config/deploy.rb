@@ -4,7 +4,7 @@ require 'mina/git'
 require 'mina/rvm'
 
 set :user, 'picnow'
-set :domain, 'ec2-54-172-158-208.compute-1.amazonaws.com'
+set :domain, 'ec2-54-172-93-162.compute-1.amazonaws.com'
 set :deploy_to, '/var/www/www.picnow.co'
 set :repository, 'git@github.com:puhsh/picnow.git'
 set :branch, 'master'
