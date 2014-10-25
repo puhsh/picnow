@@ -3,7 +3,7 @@ class V1::GroupsController < V1::ApiController
 
   def index
     @user = User.find(params[:user_id])
-    @groups = @user.groups.order('last_photo_sent_at desc nulls last')
+    @groups = @user.groups.includes(:notifications).order('last_photo_sent_at desc nulls last')
     render json: @groups, each_serializer: GroupArraySerializer
   end
 

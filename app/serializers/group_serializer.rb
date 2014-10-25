@@ -3,6 +3,6 @@ class GroupSerializer < ActiveModel::Serializer
   has_many :photos
 
   def unread_notifications_count
-    0
+    object.notifications.where(read: false).count
   end
 end
