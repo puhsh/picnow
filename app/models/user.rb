@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   has_one :accepted_invite, class_name: 'Invite', foreign_key: 'joined_user_id', dependent: :destroy
   has_one :access_token, dependent: :destroy
   has_one :text_verification, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   
   # Callbacks
   after_commit :generate_text_verification!, on: :create

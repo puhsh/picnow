@@ -5,6 +5,7 @@ class Group < ActiveRecord::Base
   has_many :photos
   has_many :comments
   has_many :invites
+  has_many :notifications
 
   # Callbacks
   
