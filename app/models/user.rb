@@ -72,9 +72,14 @@ class User < ActiveRecord::Base
   # Public: Finds your "friends" on PicNow aka users that are in the same groups you are in
   #
   # Returns a collection of users
-  def friends
+  def friends(group = nil)
     current_group_ids = GroupUser.select(:group_id).where(user_id: self.id)
-    user_ids_in_groups = GroupUser.select(:user_id).where(group_id: current_group_ids).where.not(user_id: self.id)
+    if group
+      user_ids_in_groups = GroupUser.select(:user_id).where(group_id: current_group_ids).where.not(user_id: self.id).where.not(group_id: group.id)
+    else
+      user_ids_in_groups = GroupUser.select(:user_id).where(group_id: current_group_ids).where.not(user_id: self.id)
+    end
+
     User.where(id: user_ids_in_groups)
   end
 

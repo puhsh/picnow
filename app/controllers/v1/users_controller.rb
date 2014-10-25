@@ -48,7 +48,8 @@ class V1::UsersController < V1::ApiController
 
   def friends
     @user = User.find(params[:id])
-    @friends = @user.friends.order(username: :asc)
+    @group = Group.find(params[:group_id]) if params[:group_id]
+    @friends = @user.friends(@group).order(username: :asc)
     render json: @friends
   end
 
