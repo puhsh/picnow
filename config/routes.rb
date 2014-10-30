@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         resources :comments, only: [:create]
         resources :photos, only: [:create]
         resources :invites, only: [:create]
+        resources :group_users, only: [:create, :destroy]
 
         member do 
           get :activity
