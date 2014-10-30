@@ -2,17 +2,23 @@ class V1::InvitesController < V1::ApiController
   before_filter :verify_access_token
 
   def create
-    @invite = Invite.new(invite_params)
-    if @invite.save
-      render json: @invite
-    else
-      unprocessable_entity!
+    @group = Group.find(params[:group_id])
+    @invites = []
+
+    params[:invites].each do |invite|
+      @invite = @group.invites.build
+      @invite.to = invite[:to]
+      @invite.user = current_user
+      @invite.save
+      @invites << @invite
     end
+
+    render json: @invites
   end
 
   protected 
 
   def invite_params
-    params.require(:invite).permit(:user_id, :to, :group_id)
+    params.permit(:user_id, :to, :group_id)
   end
 end
