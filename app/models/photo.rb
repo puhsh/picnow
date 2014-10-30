@@ -25,6 +25,7 @@ class Photo < ActiveRecord::Base
   
   # Scopes
   default_scope -> { order(created_at: :desc).limit(25) }
+  scope :recent, -> { where('created_at >= ?', 24.hours.ago) }
   
   # Methods
   
