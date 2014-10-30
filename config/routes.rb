@@ -18,6 +18,11 @@ Rails.application.routes.draw do
         resources :photos, only: [:create]
         resources :invites, only: [:create]
         resources :group_users, only: [:create, :destroy]
+        resources :notifications, only: [] do
+          collection do
+            post :mark_as_read
+          end
+        end
 
         member do 
           get :activity

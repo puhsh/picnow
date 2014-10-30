@@ -22,4 +22,11 @@ class Group < ActiveRecord::Base
   def activity
     (self.photos + self.comments).sort_by(&:created_at)
   end
+
+  # Public: Marks all notifications as read for the given group
+  #
+  # Returns an array of notifications
+  def mark_notifications_as_read!(user)
+    self.notifications.where(read: false, user_id: user.id).update_all(read: true)
+  end
 end
