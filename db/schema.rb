@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141025193454) do
+ActiveRecord::Schema.define(version: 20141030201028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,19 @@ ActiveRecord::Schema.define(version: 20141025193454) do
 
   add_index "devices", ["brand"], name: "index_devices_on_brand", using: :btree
   add_index "devices", ["user_id"], name: "index_devices_on_user_id", using: :btree
+
+  create_table "group_photos", force: true do |t|
+    t.integer  "group_id"
+    t.integer  "photo_id"
+    t.integer  "point_value", default: 99
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "group_photos", ["group_id"], name: "index_group_photos_on_group_id", using: :btree
+  add_index "group_photos", ["photo_id"], name: "index_group_photos_on_photo_id", using: :btree
+  add_index "group_photos", ["user_id"], name: "index_group_photos_on_user_id", using: :btree
 
   create_table "group_users", force: true do |t|
     t.integer  "user_id"
@@ -89,7 +102,6 @@ ActiveRecord::Schema.define(version: 20141025193454) do
 
   create_table "photos", force: true do |t|
     t.integer  "user_id"
-    t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_file_name"
@@ -99,7 +111,6 @@ ActiveRecord::Schema.define(version: 20141025193454) do
     t.string   "image_fingerprint"
   end
 
-  add_index "photos", ["group_id"], name: "index_photos_on_group_id", using: :btree
   add_index "photos", ["user_id"], name: "index_photos_on_user_id", using: :btree
 
   create_table "rpush_apps", force: true do |t|

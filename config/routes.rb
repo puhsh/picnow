@@ -15,7 +15,6 @@ Rails.application.routes.draw do
       resources :groups, only: [:index, :show, :create] do
         resources :users, only: [:index]
         resources :comments, only: [:create]
-        resources :photos, only: [:create]
         resources :invites, only: [:create]
         resources :group_users, only: [:create, :destroy]
         resources :notifications, only: [] do
@@ -31,6 +30,8 @@ Rails.application.routes.draw do
         end
 
       end
+
+      resources :photos, only: [:create]
 
       resources :devices, only: [:create]
       resources :text_verifications, only: [:create, :update]

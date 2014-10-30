@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
   has_many :photos, dependent: :nullify
+  has_many :group_photos
   has_many :comments, dependent: :destroy
   has_many :devices, dependent: :destroy
   has_many :invites, dependent: :nullify
@@ -91,7 +92,7 @@ class User < ActiveRecord::Base
   # Returns true
   def give_first_point
     if self.avatar_file_name_changed? && self.avatar_file_name_was.nil?
-      self.increment(:pic_now_count, 1)
+      self.increment(:pic_now_count, 99)
     end
   end
 end

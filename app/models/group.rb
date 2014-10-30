@@ -2,7 +2,8 @@ class Group < ActiveRecord::Base
   # Relations
   has_many :group_users
   has_many :users, through: :group_users
-  has_many :photos
+  has_many :group_photos
+  has_many :photos, through: :group_photos
   has_many :comments
   has_many :invites
   has_many :notifications

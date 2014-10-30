@@ -9,10 +9,20 @@ class V1::PhotosController < V1::ApiController
 
   def create
     @user = User.find(params[:user_id])
-    @group = Group.find(params[:group_id])
     @photo = Photo.new(photo_params)
     @photo.user = @user
-    @photo.group = @group
+
+    if params[:group_ids]
+      params[:group_ids].each do |group_id|
+        @group = Group.find(group_id)
+        @group_photo = @photo.group_photos.build
+        @group_photo.user = @user
+        @group_photo.group = @group
+      end
+    else
+      unprocessable_entity!
+    end
+
     if @photo.save
       render json: @photo
     else

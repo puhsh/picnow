@@ -12,7 +12,8 @@ class Photo < ActiveRecord::Base
 
   # Relations
   belongs_to :user
-  belongs_to :group
+  has_many :group_photos
+  has_many :groups, through: :group_photos
   
   # Callbacks
   after_commit :touch_group_last_photo_sent_at
@@ -20,13 +21,23 @@ class Photo < ActiveRecord::Base
   
   # Validations
   validates :user, presence: true
-  validates :group, presence: true
   validates_attachment_content_type :image, content_type: ['image/jpeg', 'image/jpg', 'image/png']
   
   # Scopes
   default_scope -> { order(created_at: :desc).limit(25) }
   
   # Methods
+  
+  # Public: Calculates the number of points for a photo. The first result is always used since a photo 
+  # sent to multiple groups will have the same point value. There would never be a situation where you send 
+  # multiple photos to multiple groups at once, resulting in different point values.... 
+  #
+  # If we get to that point, then we have gone insane and I quit....
+  #
+  # Returns an integer
+  def point_value
+    GroupPhoto.where(photo_id: self.id, user_id: self.user_id).first.try(&:point_value)
+  end
 
   protected
 
@@ -34,15 +45,15 @@ class Photo < ActiveRecord::Base
   #
   # Returns
   def touch_group_last_photo_sent_at
-    self.group.update_column(:last_photo_sent_at, self.created_at)
+    self.groups.update_all(last_photo_sent_at: self.created_at)
   end
 
   def notify_group_users
-    group = self.group
-    users = group.users.where('users.id != ?', self.user_id)
-    users.each do |user|
-      Notification.create(user_id: user.id, group_id: group.id)
-      user.devices.each { |x| x.fire_notification!("PicNow from #{self.user.username}", :picnow) }
+    group_ids = self.group_photos.select(:group_id)
+    group_users = GroupUser.includes(:user).where(group_id: group_ids).where.not(user_id: self.user_id)
+    group_users.each do |group_user|
+      Notification.create(user_id: group_user.user_id, group_id: group_user.group_id)
+      group_user.user.devices.each { |x| x.fire_notification!("PicNow from #{self.user.username}", :picnow) }
     end
   end
 end
