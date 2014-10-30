@@ -13,11 +13,11 @@ class V1::PhotosController < V1::ApiController
     @photo.user = @user
 
     if params[:group_ids]
-      params[:group_ids].each do |group_id|
-        @group = Group.find(group_id)
+      @groups = Group.where(id: params[:group_ids])
+      @groups.each do |group|
         @group_photo = @photo.group_photos.build
         @group_photo.user = @user
-        @group_photo.group = @group
+        @group_photo.group = group
       end
     else
       unprocessable_entity!
