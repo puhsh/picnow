@@ -26,7 +26,7 @@ class V1::GroupsController < V1::ApiController
   def activity
     @group = Group.includes({photos: :user}, {comments: :user}).find(params[:id])
     @activity = @group.activity
-    render json: @activity
+    render_paginated @activity
   end
 
   protected

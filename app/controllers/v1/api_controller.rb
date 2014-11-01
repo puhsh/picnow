@@ -25,6 +25,11 @@ class V1::ApiController < ActionController::Metal
   def verify_access_token
     forbidden! unless (current_user && params[:token] && current_user.access_token.token == params[:token]) || bypass_auth?
   end
+  
+  # TODO Fully build this out when we start paginating stuff...
+  def render_paginated(resource, opts = {})
+    render json: resource, root: 'items', meta: {}
+  end
 
   protected
 
