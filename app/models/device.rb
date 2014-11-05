@@ -54,7 +54,7 @@ class Device < ActiveRecord::Base
     n = Rpush::Apns::Notification.new
     n.app = Rpush::Apns::App.find_by_name("pic_now_#{Rails.env}")
     n.device_token = self.token
-    n.badge = 1
+    n.badge = self.user.notifications.where(read: false).count
     n.alert = message
     n.data = { event: event }
     n.save!
