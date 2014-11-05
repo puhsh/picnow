@@ -7,6 +7,7 @@ class Group < ActiveRecord::Base
   has_many :comments
   has_many :invites
   has_many :notifications
+  belongs_to :admin, class_name: 'User', foreign_key: 'admin_id'
 
   # Callbacks
   
