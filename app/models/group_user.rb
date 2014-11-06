@@ -10,7 +10,7 @@ class GroupUser < ActiveRecord::Base
   validates :group, presence: true
   
   # Scopes
-  default_scope -> { where(deleted_at: nil) }
+  scope :not_deleted, -> { where(deleted_at: nil) }
 
   # Methods
 end
