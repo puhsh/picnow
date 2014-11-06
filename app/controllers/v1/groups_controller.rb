@@ -33,6 +33,7 @@ class V1::GroupsController < V1::ApiController
   def destroy
     @group = Group.find(params[:id])
     @group.touch(:deleted_at)
+    @group.group_users.update_all(deleted_at: DateTime.now)
     render json: @group
   end
 

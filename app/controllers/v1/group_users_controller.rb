@@ -13,7 +13,7 @@ class V1::GroupUsersController < V1::ApiController
 
   def destroy
     @group_user = GroupUser.find(params[:id])
-    @group_user.destroy
+    @group_user.touch(:deleted_at)
     render json: @group_user
   end
 
