@@ -5,7 +5,7 @@ class V1::TextVerificationsController < V1::ApiController
     @user = User.find(params[:user_id])
     if @user
       @user.generate_text_verification!
-      render json: @user
+      render json: @user, serializer: NewUserSerializer
     else
       unprocessable_entity!
     end
@@ -15,7 +15,7 @@ class V1::TextVerificationsController < V1::ApiController
     @text_verification = TextVerification.where(id: params[:id], user_id: params[:user_id]).first
     @user = User.find(params[:user_id])
     if @user && @text_verification && ( did_verify_user? || resent_code_to_user? )
-      render json: @user
+      render json: @user, serializer: NewUserSerializer
     else
       unprocessable_entity!
     end
