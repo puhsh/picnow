@@ -29,6 +29,12 @@ class V1::GroupsController < V1::ApiController
     @activity = @group.activity
     render_paginated @activity
   end
+  
+  def destroy
+    @group = Group.find(params[:id])
+    @group.touch(:deleted_at)
+    render json: @group
+  end
 
   protected
 
