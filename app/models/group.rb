@@ -15,6 +15,7 @@ class Group < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 20 }
   
   # Scopes
+  default_scope -> { where(deleted_at: nil) }
 
   # Methods
   
