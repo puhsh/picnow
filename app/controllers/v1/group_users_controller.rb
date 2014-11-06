@@ -11,9 +11,9 @@ class V1::GroupUsersController < V1::ApiController
     end
   end
 
-  def destroy
-    @group_user = GroupUser.find(params[:id])
-    @group_user.touch(:deleted_at)
+  def remove
+    @group_user = GroupUser.where(user_id: params[:user_id], group_id: params[:group_id]).first
+    @group_user.touch(:deleted_at) if @group_user
     render json: @group_user
   end
 

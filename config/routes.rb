@@ -12,11 +12,15 @@ Rails.application.routes.draw do
         get :friends
       end
 
-      resources :groups, only: [:index, :show, :create, :destroy] do
+      resources :groups, only: [:index, :show, :create] do
         resources :users, only: [:index]
         resources :comments, only: [:create]
         resources :invites, only: [:create]
-        resources :group_users, only: [:create, :destroy]
+        resources :group_users, only: [:create] do 
+          collection do
+            delete :remove
+          end
+        end
         resources :notifications, only: [] do
           collection do
             post :mark_as_read
