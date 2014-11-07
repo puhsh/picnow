@@ -6,7 +6,7 @@ class Comment < ActiveRecord::Base
   # Callbacks
   
   # Validations
-  validates :content, presence: true, length: { maximum: 40 }
+  validates :content, presence: true, length: { maximum: 500 }
   
   # Scopes
 
