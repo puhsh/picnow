@@ -5,4 +5,5 @@ class CommentSerializer < ActiveModel::Serializer
   def resource_name
     object.class.to_s.downcase
   end
+
 end
