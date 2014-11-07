@@ -13,4 +13,11 @@ class V1::CommentsController < V1::ApiController
       unprocessable_entity!
     end
   end
+
+
+  protected
+
+  def comment_attributes
+    params.require(:comment).permit(:content)
+  end
 end
