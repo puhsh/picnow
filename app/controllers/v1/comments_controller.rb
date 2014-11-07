@@ -4,7 +4,7 @@ class V1::CommentsController < V1::ApiController
   def create
     @user = User.find(params[:user_id])
     @group = Group.find(params[:group_id])
-    @comment = Comment.new(params[:comment])
+    @comment = Comment.new(comment_attributes)
     @comment.user = @user
     @comment.group = @group
     if @comment.save
