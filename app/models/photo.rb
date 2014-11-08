@@ -6,7 +6,7 @@ class Photo < ActiveRecord::Base
   has_attached_file :image,
                     styles: { large: '1280x1280#', medium: '640x640#', small: '320x320#' },
                     s3_permissions: :public_read,
-                    s3_headers: { 'Expires' => 10.years.from_now.httpdate },
+                    s3_headers: { 'Cache-Control' => 'max-age=315576000', 'Expires' => 10.years.from_now.httpdate },
                     path: 'photos/:id-:style-:fingerprint.:extension',
                     use_timestamp: false
 
