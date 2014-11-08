@@ -25,7 +25,7 @@ class V1::GroupsController < V1::ApiController
   end
 
   def activity
-    @group = Group.includes({photos: :user}, {comments: :user}).find(params[:id])
+    @group = Group.includes({photos: {user: :text_verification}}, {comments: {user: :text_verification}}).find(params[:id])
     @activity = @group.activity
     render_paginated @activity
   end
