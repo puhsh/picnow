@@ -84,5 +84,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # CDN
-  config.paperclip_defaults = { url: ':s3_alias_url', s3_host_alias: 'cdn.picnow.co' }
+  config.paperclip_defaults = { url: ':s3_alias_url', s3_host_alias: 'cdn.picnow.rocks' }
 end
