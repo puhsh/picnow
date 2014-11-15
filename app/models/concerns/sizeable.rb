@@ -9,7 +9,8 @@ module Sizeable
       large: attachment.url(:large),
       original: attachment.url,
       medium: attachment.url(:medium),
-      small: attachment.url(:small)
+      small: attachment.url(:small),
+      thumbnail: attachment.url(:thumbnail)
     }
   end
 
