@@ -27,6 +27,7 @@ class V1::GroupsController < V1::ApiController
   def activity
     @group = Group.includes({photos: {user: :text_verification}}, {comments: {user: :text_verification}}).find(params[:id])
     @activity = @group.activity
+    expires_in 24.hours
     render_paginated @activity
   end
   
