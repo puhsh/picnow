@@ -2,13 +2,22 @@ class V1::GroupUsersController < V1::ApiController
   before_filter :verify_access_token
 
   def create
+    @group_users = []
     @group = Group.find(params[:group_id])
-    @group_user = @group.group_users.build(group_user_params)
-    if @group_user.save
-      render json: @group_user
-    else
-      unprocessable_entity!
+    if params[:user_ids]
+      params[:user_ids].each do |user_id|
+        @group_user = @group.group_users.build(group_user_params)
+        @group_user.user_id = user_id
+        @group_user.save
+        @group_users << @group_user
+      end
+    else 
+      @group_user = @group.group_users.build(group_user_params)
+      @group_user.save
+      @group_users << @group_user
     end
+
+    render json: @group_users
   end
 
   def remove
