@@ -27,6 +27,7 @@ class TextVerification < ActiveRecord::Base
   def verify!(user, code)
     if self.user_id == user.id && self.code == code
       self.update_attributes(confirmed_at: DateTime.now)
+      user.update_attributes(verified: true)
       user.process_pending_group_invites!
     end
   end
@@ -68,6 +69,7 @@ class TextVerification < ActiveRecord::Base
   def auto_verify
     if Rails.env.development?
       self.confirmed_at = DateTime.now
+      user.update_attributes(verified: true)
     end
   end
 end
