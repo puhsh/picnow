@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106155045) do
+ActiveRecord::Schema.define(version: 20141116135503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 20141106155045) do
 
   add_index "devices", ["brand"], name: "index_devices_on_brand", using: :btree
   add_index "devices", ["user_id"], name: "index_devices_on_user_id", using: :btree
+
+  create_table "events", force: true do |t|
+    t.integer  "group_id"
+    t.json     "payload"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["group_id"], name: "index_events_on_group_id", using: :btree
 
   create_table "group_photos", force: true do |t|
     t.integer  "group_id"
