@@ -12,11 +12,11 @@ module Eventable
     case self
     when GroupPhoto
       @event.group_id = self.group_id
-      @event.payload = PhotoSerializer.new(self.photo).to_json
+      @event.payload = self.photo.to_json
       @event.resource = self.photo
     when Comment
       @event.group_id = self.group_id
-      @event.payload = CommentSerializer.new(self).to_json
+      @event.payload = self.to_json
       @event.resource = self
     else
     end
