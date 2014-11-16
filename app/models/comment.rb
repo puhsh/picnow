@@ -4,6 +4,7 @@ class Comment < ActiveRecord::Base
   # Relations
   belongs_to :user
   belongs_to :group
+  has_many :events, as: :resource
 
   # Callbacks
   after_commit :notify_group_users, on: :create

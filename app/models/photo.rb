@@ -14,6 +14,7 @@ class Photo < ActiveRecord::Base
   belongs_to :user
   has_many :group_photos
   has_many :groups, through: :group_photos
+  has_many :events, as: :resource
   
   # Callbacks
   after_commit :touch_group_last_photo_sent_at

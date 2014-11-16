@@ -28,6 +28,7 @@ Rails.application.routes.draw do
         end
 
         resources :invites, only: [:create]
+        resources :events, only: [:index]
 
         member do 
           get :activity
