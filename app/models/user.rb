@@ -97,4 +97,16 @@ class User < ActiveRecord::Base
       self.increment(:pic_now_count, 99)
     end
   end
+
+  # Protected: Determines if there is an invite that exists for a given user to a given group and adds them to the group
+  #
+  # Returns group users
+  def process_pending_group_invites!
+    invites = Invite.where(to: self.phone_number)
+    if invites.any?
+      invites.each do |x|
+        GroupUser.create(user_id: self.id, group_id: x.group_id)
+      end
+    end
+  end
 end
