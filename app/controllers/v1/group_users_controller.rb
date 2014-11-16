@@ -6,7 +6,7 @@ class V1::GroupUsersController < V1::ApiController
     @group = Group.find(params[:group_id])
     if params[:user_ids]
       params[:user_ids].each do |user_id|
-        @group_user = @group.group_users.build(group_user_params)
+        @group_user = @group.group_users.build
         @group_user.user_id = user_id
         @group_user.save
         @group_users << @group_user
