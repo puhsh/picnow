@@ -10,6 +10,7 @@ class Comment < ActiveRecord::Base
   validates :content, presence: true, length: { maximum: 500 }
   
   # Scopes
+  scope :recent, -> { where('comments.created_at >= ?', 1.week.ago) }
 
   # Methods
 

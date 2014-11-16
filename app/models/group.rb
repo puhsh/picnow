@@ -23,7 +23,7 @@ class Group < ActiveRecord::Base
   #
   # Returns an array of Comment and Photo objects
   def activity
-    (self.photos.recent + self.comments).sort_by(&:created_at)
+    (self.photos.recent + self.comments.recent).sort_by(&:created_at)
   end
 
   # Public: Marks all notifications as read for the given group
