@@ -78,7 +78,8 @@ class User < ActiveRecord::Base
   def friends(group = nil)
     current_group_ids = GroupUser.select(:group_id).where(user_id: self.id)
     if group
-      user_ids_in_groups = GroupUser.select(:user_id).where(group_id: current_group_ids).where.not(user_id: self.id).where.not(group_id: group.id)
+      user_ids_in_group = GroupUser.select(:user_id).where(group_id: group.id)
+      user_ids_in_groups = GroupUser.select(:user_id).where(group_id: current_group_ids).where.not(user_id: user_ids_in_group).where.not(group_id: group.id)
     else
       user_ids_in_groups = GroupUser.select(:user_id).where(group_id: current_group_ids).where.not(user_id: self.id)
     end
