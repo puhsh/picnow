@@ -26,7 +26,7 @@ class V1::GroupsController < V1::ApiController
 
   def activity
     @group = Group.find(params[:id])
-    @activity = @group.events.map(&:payload)
+    @activity = @group.events.limit(100).map(&:payload)
     render_paginated @activity
   end
   
