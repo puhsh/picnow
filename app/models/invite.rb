@@ -10,5 +10,8 @@ class Invite < ActiveRecord::Base
   
   # Scopes
 
+  # Third Party
+  phony_normalize :to, default_country_code: 'US'
+
   # Methods
 end
