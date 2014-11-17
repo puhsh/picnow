@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   
   has_attached_file :avatar,
                     styles: { large: '1280x1280#', medium: '640x640#', small: '320x320#', thumbnail: '50x50#' },
-                    s3_permissions: :public_read,
+                    s3_permissions: :private,
                     s3_headers: { 'Cache-Control' => 'max-age=315576000', 'Expires' => 10.years.from_now.httpdate },
                     path: 'users/:id-avatar-:style-:fingerprint.:extension',
                     use_timestamp: false
