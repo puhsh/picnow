@@ -1,16 +1,16 @@
 module Sizeable
   extend ActiveSupport::Concern
   
-  # Public: Calculates a hash of attachment expiring_url(10)s per size
+  # Public: Calculates a hash of attachment urls per size
   #
   # Returns a hash
   def image_urls
     {
-      large: attachment.expiring_url(10, :large),
-      original: attachment.expiring_url(10),
-      medium: attachment.expiring_url(10, :medium),
-      small: attachment.expiring_url(10, :small),
-      thumbnail: attachment.expiring_url(10, :thumbnail)
+      large: attachment.url(:large),
+      original: attachment.url,
+      medium: attachment.url(:medium),
+      small: attachment.url(:small),
+      thumbnail: attachment.url(:thumbnail)
     }
   end
 
