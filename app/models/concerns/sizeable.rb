@@ -6,11 +6,11 @@ module Sizeable
   # Returns a hash
   def image_urls
     {
-      large: attachment.expiring_url(10, :large),
-      original: attachment.expiring_url(10),
-      medium: attachment.expiring_url(10, :medium),
-      small: attachment.expiring_url(10, :small),
-      thumbnail: attachment.expiring_url(10, :thumbnail)
+      large: attachment.expiring_url(60, :large),
+      original: attachment.expiring_url(60),
+      medium: attachment.expiring_url(60, :medium),
+      small: attachment.expiring_url(60, :small),
+      thumbnail: attachment.expiring_url(60, :thumbnail)
     }
   end
 
