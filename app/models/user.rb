@@ -88,17 +88,6 @@ class User < ActiveRecord::Base
     User.where(id: user_ids_in_groups)
   end
 
-  protected
-
-  # Protected: Gives a user their first PicNow point for taking their first selfie
-  # 
-  # Returns true
-  def give_first_point
-    if self.avatar_file_name_changed? && self.avatar_file_name_was.nil?
-      self.increment(:pic_now_count, 99)
-    end
-  end
-
   # Protected: Determines if there is an invite that exists for a given user to a given group and adds them to the group
   #
   # Returns group users
@@ -108,6 +97,17 @@ class User < ActiveRecord::Base
       invites.each do |x|
         GroupUser.create(user_id: self.id, group_id: x.group_id)
       end
+    end
+  end
+
+  protected
+
+  # Protected: Gives a user their first PicNow point for taking their first selfie
+  # 
+  # Returns true
+  def give_first_point
+    if self.avatar_file_name_changed? && self.avatar_file_name_was.nil?
+      self.increment(:pic_now_count, 99)
     end
   end
 end
