@@ -26,9 +26,9 @@ class TextVerification < ActiveRecord::Base
   # Returns a TextVerification record
   def verify!(user, code)
     if self.user_id == user.id && self.code == code
+      self.user.update_attributes(verified: true)
+      self.user.process_pending_group_invites!
       self.update_attributes(confirmed_at: DateTime.now)
-      user.update_attributes(verified: true)
-      user.process_pending_group_invites!
     end
   end
 
