@@ -7,7 +7,7 @@ class GroupPhoto < ActiveRecord::Base
   belongs_to :user
 
   # Callbacks
-  before_save :zero_out_points
+  before_create :zero_out_points
   
   # Validations
   
