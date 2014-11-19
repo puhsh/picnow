@@ -29,17 +29,6 @@ class Photo < ActiveRecord::Base
   scope :recent, -> { where('photos.created_at >= ?', 1.week.ago) }
   
   # Methods
-  
-  # Public: Calculates the number of points for a photo. The first result is always used since a photo 
-  # sent to multiple groups will have the same point value. There would never be a situation where you send 
-  # multiple photos to multiple groups at once, resulting in different point values.... 
-  #
-  # If we get to that point, then we have gone insane and I quit....
-  #
-  # Returns an integer
-  def point_value
-    GroupPhoto.where(photo_id: self.id, user_id: self.user_id).first.try(&:point_value)
-  end
 
   protected
 
