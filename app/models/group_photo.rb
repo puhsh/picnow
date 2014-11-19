@@ -21,7 +21,7 @@ class GroupPhoto < ActiveRecord::Base
   #
   # Returns a 0 if the value is adjusted
   def zero_out_points
-    unless GroupUser.where(group_id: self.group_id).count > 1 && GroupPhoto.where(group_id: self.group_id).exists?
+    unless GroupUser.where(group_id: self.group_id).count > 1 || !GroupPhoto.where(group_id: self.group_id).exists?
       self.point_value = 0
     end
   end
