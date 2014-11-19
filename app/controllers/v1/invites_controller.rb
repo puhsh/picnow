@@ -5,12 +5,14 @@ class V1::InvitesController < V1::ApiController
     @group = Group.find(params[:group_id])
     @invites = []
 
-    params[:invites].each do |invite|
-      @invite = @group.invites.build
-      @invite.to = invite[:to]
-      @invite.user = current_user
-      @invite.save
-      @invites << @invite
+    if params[:invites]
+      params[:invites].each do |invite|
+        @invite = @group.invites.build
+        @invite.to = invite[:to]
+        @invite.user = current_user
+        @invite.save
+        @invites << @invite
+      end
     end
 
     render json: @invites
