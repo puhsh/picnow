@@ -69,7 +69,6 @@ class TextVerification < ActiveRecord::Base
   def auto_verify
     if Rails.env.development?
       self.confirmed_at = DateTime.now
-      self.user.update_attributes(verified: true)
     end
   end
 end

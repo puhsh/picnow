@@ -21,7 +21,8 @@ class V1::UsersController < V1::ApiController
     @user = User.new(user_params)
     if @user.save
       @user.generate_access_token!
-      sign_in :user, @user
+      reset_session
+      sign_in :user, @user, event: :token_authentication
       render json: @user, serializer: NewUserSerializer
     else
       unprocessable_entity!({meta: @user.errors.full_messages.first})

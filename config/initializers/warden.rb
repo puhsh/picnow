@@ -15,12 +15,15 @@ class Warden::SessionSerializer
 end
 
 Warden::Strategies.add(:token_authentication) do
+  include ActionController::HttpAuthentication::Token::ControllerMethods
   def valid?
-    params['token']
+    request.headers['Authorization']
   end
 
   def authenticate!
-    auth_token = AccessToken.where(token: params['token']).first
-    auth_token.nil? ? fail!('Forbidden') : success!(auth_token.user)
+    authenticate_or_request_with_http_token do |token, opts|
+      auth_token = AccessToken.where(token: token).first
+      auth_token.nil? ? fail!('Forbidden') : success!(auth_token.user)
+    end
   end
 end

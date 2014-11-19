@@ -16,6 +16,7 @@ class V1::ApiController < ActionController::Metal
   include ActionController::RequestForgeryProtection
   include ActionController::StrongParameters
   include ActionController::Rescue 
+  include ActionController::HttpAuthentication::Token::ControllerMethods
   include Rails.application.routes.url_helpers
 
   before_filter :skip_trackable
@@ -23,7 +24,15 @@ class V1::ApiController < ActionController::Metal
   protect_from_forgery with: :null_session, if: :json_request?
 
   def verify_access_token
-    forbidden! unless (current_user && params[:token] && current_user.access_token.token == params[:token]) || bypass_auth?
+    if params[:token]
+      current_user && params[:token] && current_user.access_token.token == params[:token]
+    elsif bypass_auth?
+      true
+    else
+      authenticate_or_request_with_http_token do |token, opts|
+        current_user && token && current_user.access_token.token == token
+      end
+    end
   end
   
   # TODO Fully build this out when we start paginating stuff...
