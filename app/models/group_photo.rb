@@ -23,6 +23,8 @@ class GroupPhoto < ActiveRecord::Base
   def zero_out_points
     if (GroupUser.where(group_id: self.group_id).count == 1 && GroupPhoto.where(group_id: self.group_id).count != 0) || Notification.where(group_id: self.group_id, read: false, user_id: self.user_id).count != 0
       self.point_value = 0
+    else
+      self.point_value = self.point_value || 99
     end
   end
 end
