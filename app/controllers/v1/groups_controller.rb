@@ -28,6 +28,7 @@ class V1::GroupsController < V1::ApiController
     @group = Group.find(params[:id])
     @group.touch(:deleted_at)
     @group.group_users.update_all(deleted_at: DateTime.now)
+    Notification.where(group_id: @group.id).update_all(read: true)
     render json: @group
   end
 
