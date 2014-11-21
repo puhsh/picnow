@@ -20,6 +20,9 @@ div#jumbo {
       font-size: rem-calc(12);
     }
   }
+    @media #{$small-only} {
+      margin-top: 0px;
+    }
 }
 
 .logo  {
