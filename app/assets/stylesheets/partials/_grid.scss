@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'jaf-mashine-rounded'
+  url('/assets/fonts/jaf-mashine-rounded-400.ttf') format('truetype')
+  url('/assets/fonts/jaf-mashine-rounded-700.ttf') format('truetype')
+}
 body {
   background: linear-gradient(
                 rgba(0, 0, 0, 0.5), 
@@ -20,9 +25,6 @@ div#jumbo {
       font-size: rem-calc(12);
     }
   }
-    @media #{$small-only} {
-      margin-top: 0px;
-    }
 }
 
 .logo  {
@@ -33,6 +35,10 @@ div#jumbo {
   width: 100%;
   height: auto;
   margin-bottom: 65px;
+  margin-top: 200px;
+  @media #{$small-only} {
+    margin-top: 20px;
+  }
 }
 
 div#app-download {
