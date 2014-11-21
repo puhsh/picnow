@@ -1,14 +1,12 @@
 body {
-  background: asset-url('gorilla.png') no-repeat center center fixed;
+  background: linear-gradient(
+                rgba(0, 0, 0, 0.5), 
+                rgba(0, 0, 0, 0.5)
+              ), asset-url('gorilla.png') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-    -webkit-animation: fadein 1s;
-    -moz-animation: fadein 1s; /* Firefox */
-    -ms-animation: fadein 1s; /* Internet Explorer */
-    -o-animation: fadein 1s; /* Opera */
-    animation: fadein 1s;
 }
 
 div#jumbo {
@@ -25,12 +23,13 @@ div#jumbo {
 }
 
 .logo  {
-  @media #{$small-only} {
-    max-width: 50%;
-  }
-  max-width: 70%;
+  // @media #{$small-only} {
+  //   max-width: 50%;
+  // }
+  // max-width: 70%;
   width: 100%;
   height: auto;
+  margin-bottom: 65px;
 }
 
 div#app-download {
@@ -47,6 +46,12 @@ div#app-download {
     height: auto;
     width: 100%;
   }
+}
+
+.white-button {
+  @include button($padding: rem-calc(22), $bg: white, $radius:10px);
+  font-weight: bold;
+  font-size: 25px;
 }
 
 @-webkit-keyframes fadein {
