@@ -1,7 +1,6 @@
 @font-face {
-  font-family: 'jaf-mashine-rounded'
-  url('/assets/fonts/jaf-mashine-rounded-400.ttf') format('truetype')
-  url('/assets/fonts/jaf-mashine-rounded-700.ttf') format('truetype')
+  font-family: 'jaf-mashine-rounded';
+  src: url('/assets/fonts/jaf-mashine-rounded-400.ttf') format('truetype')
 }
 body {
   background: linear-gradient(
@@ -61,6 +60,7 @@ div#app-download {
   @include button($padding: rem-calc(22), $bg: white, $radius:10px);
   font-weight: bold;
   font-size: 25px;
+  font-family: 'jaf-mashine-rounded'
 }
 
 @-webkit-keyframes fadein {
