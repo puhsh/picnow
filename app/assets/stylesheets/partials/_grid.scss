@@ -1,8 +1,8 @@
 @font-face {
-  font-family: 'Mashine Rounded';
+  font-family: 'MashineRounded';
   src:
-      url('/assets/fonts/jaf-mashine-rounded-400.ttf') format('truetype')
-      url('/assets/fonts/jaf-mashine-rounded-400.svg') format('svg')
+      asset-url('jaf-mashine-rounded-400.ttf') format('truetype'),
+      asset-url('jaf-mashine-rounded-400.svg#850') format('svg');
 }
 body {
   background: linear-gradient(
@@ -62,7 +62,7 @@ div#app-download {
   @include button($padding: rem-calc(22), $bg: white, $radius:10px);
   font-weight: bold;
   font-size: 25px;
-  font-family: 'Mashine Rounded';
+  // font-family: 'MashineRounded';
 }
 
 @-webkit-keyframes fadein {
