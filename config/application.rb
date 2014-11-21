@@ -29,5 +29,6 @@ module PicNow
 
     config.filter_parameters += [:password, :password_confirmation, :token]
     config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
   end
 end
