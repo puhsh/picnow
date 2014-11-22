@@ -56,12 +56,15 @@ class V1::UsersController < V1::ApiController
 
   def friends_from_contacts
     @normalized_numbers = []
+    @user = User.find(params[:id])
+    @group = Group.find(params[:group_id]) if params[:group_id]
+
     params[:phone_numbers].each do |number|
       @normalized_numbers << PhonyRails.normalize_number(number, county_number: 1, default_country_number: 1)
     end
 
-    # TODO LOL THIS WONT SCALE LOL
-    @users = User.where(phone_number: @normalized_numbers).order(username: :asc)
+    # TODO LOL THIS WONT SCALE LOL...maybe
+    @users = User.where(phone_number: @normalized_numbers).where.not(id: @user.id).where.not(id: @user.friends(@group)).order(username: :asc)
 
     render json: @users
   end
