@@ -61,7 +61,7 @@ class V1::UsersController < V1::ApiController
     end
 
     # TODO LOL THIS WONT SCALE LOL
-    @users = User.where(phone_number: @normalize_numbers).order(username: :asc)
+    @users = User.where(phone_number: @normalized_numbers).order(username: :asc)
 
     render json: @users
   end
