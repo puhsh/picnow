@@ -63,8 +63,11 @@ class V1::UsersController < V1::ApiController
       @normalized_numbers << PhonyRails.normalize_number(number, county_number: 1, default_country_number: 1)
     end
 
-    # TODO LOL THIS WONT SCALE LOL...maybe
-    @users = User.where(phone_number: @normalized_numbers).where.not(id: @user.id).where.not(id: @user.friends(@group)).order(username: :asc)
+    if @group
+      @users = User.where(phone_number: @normalized_numbers).where.not(id: @user.id).where.not(id: @user.friends(@group).collect(&:id)).order(username: :asc)
+    else
+      @users = User.where(phone_number: @normalized_numbers).where.not(id: @user.id).order(username: :asc)
+    end
 
     render json: @users
   end
