@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       member do
         post :avatar
         get :friends
+        get :friends_from_contacts
       end
 
       resources :groups, only: [:index, :show, :create, :destroy] do
