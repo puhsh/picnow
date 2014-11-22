@@ -17,6 +17,7 @@ class V1::PhotosController < V1::ApiController
       @groups.each do |group|
         @group_photo = @photo.group_photos.build
         @group_photo.user = @user
+        @group_photo.point_value = params[:point_value] || 99
         @group_photo.group = group
       end
     else
