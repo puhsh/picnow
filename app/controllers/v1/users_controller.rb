@@ -57,7 +57,7 @@ class V1::UsersController < V1::ApiController
   def friends_from_contacts
     @normalized_numbers = []
     params[:phone_numbers].each do |number|
-      @normalized_numbers << PhonyRails.normalize_number(number, county_number: 1)
+      @normalized_numbers << PhonyRails.normalize_number(number, county_number: 1, default_country_number: 1)
     end
 
     # TODO LOL THIS WONT SCALE LOL
