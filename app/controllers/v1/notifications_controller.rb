@@ -3,7 +3,7 @@ class V1::NotificationsController < V1::ApiController
 
   def index
     @filter = params[:read] || false
-    @notifications = Notifications.where(user_id: params[:user_id], group_id: params[:group_id], read: @filter)
+    @notifications = Notification.where(user_id: params[:user_id], group_id: params[:group_id], read: @filter)
     render json: @notifications
   end
 
