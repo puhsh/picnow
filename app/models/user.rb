@@ -100,6 +100,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Public: Determines if the user should see the progress bar when viewing a group
+  #
+  # Returns a boolean
+  def show_progress_bar?
+    if self.forced_pic_last_sent_at
+      self.forced_pic_last_sent_at > 5.minutes.ago
+    else
+      true
+    end
+  end
+
   protected
 
   # Protected: Gives a user their first PicNow point for taking their first selfie

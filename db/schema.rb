@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120193459) do
+ActiveRecord::Schema.define(version: 20141124005909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,28 +207,29 @@ ActiveRecord::Schema.define(version: 20141120193459) do
   add_index "text_verifications", ["user_id"], name: "index_text_verifications_on_user_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "username",               default: "",    null: false
-    t.string   "email",                  default: ""
-    t.string   "phone_number",           default: ""
+    t.string   "username",                default: "",    null: false
+    t.string   "email",                   default: ""
+    t.string   "phone_number",            default: ""
     t.string   "date_of_birth"
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "encrypted_password",      default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",           default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "pic_now_count",          default: 0
+    t.integer  "pic_now_count",           default: 0
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "avatar_fingerprint"
-    t.boolean  "verified",               default: false
+    t.boolean  "verified",                default: false
+    t.datetime "forced_pic_last_sent_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
