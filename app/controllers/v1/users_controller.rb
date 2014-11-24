@@ -70,6 +70,6 @@ class V1::UsersController < V1::ApiController
   private
 
   def user_params
-    params.require(:user).permit(:username, :password, :email, :phone_number, :avatar)
+    params.require(:user).permit(:username, :password, :email, :phone_number, :avatar, :forced_pic_last_sent_at)
   end
 end
