@@ -105,7 +105,7 @@ class User < ActiveRecord::Base
   # Returns a boolean
   def show_progress_bar?
     if self.forced_pic_last_sent_at
-      self.forced_pic_last_sent_at > 5.minutes.ago
+      (Time.now - self.forced_pic_last_sent_at) > 5.minutes
     else
       true
     end
