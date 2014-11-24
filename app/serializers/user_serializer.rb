@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :username, :email, :date_of_birth, :phone_number, :pic_now_count, :image_urls, :verified_account, :show_progress_bar
+  attributes :id, :username, :email, :date_of_birth, :phone_number, :pic_now_count, :image_urls, :verified_account, :show_progress_bar, :forced_pic_last_sent_at
 
   def verified_account
     object.verified_account?
