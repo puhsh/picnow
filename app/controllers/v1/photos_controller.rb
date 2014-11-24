@@ -25,6 +25,10 @@ class V1::PhotosController < V1::ApiController
     end
 
     if @photo.save
+      if params[:point_value].try { |x| x < 99 }
+        @user.touch(:forced_pic_last_sent_at)
+      end
+
       render json: @photo
     else
       unprocessable_entity!
