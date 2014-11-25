@@ -104,7 +104,11 @@ class User < ActiveRecord::Base
   #
   # Returns a boolean
   def show_progress_bar?
-    if self.forced_pic_last_sent_at
+    # TODO temp fix till client goes out with a new build
+    last_photo = self.group_photos.order(created_at: :desc).first
+    if last_photo
+      (Time.now - last_photo.created_at) > 5.minutes
+    elsif self.forced_pic_last_sent_at
       (Time.now - self.forced_pic_last_sent_at) > 5.minutes
     else
       true
