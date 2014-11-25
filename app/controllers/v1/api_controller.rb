@@ -24,9 +24,7 @@ class V1::ApiController < ActionController::Metal
   protect_from_forgery with: :null_session, if: :json_request?
 
   def verify_access_token
-    if params[:token]
-      current_user && params[:token] && current_user.access_token.token == params[:token]
-    elsif bypass_auth?
+    if bypass_auth?
       true
     else
       authenticate_or_request_with_http_token do |token, opts|
