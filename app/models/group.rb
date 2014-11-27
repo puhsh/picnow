@@ -33,4 +33,11 @@ class Group < ActiveRecord::Base
   def mark_notifications_as_read!(user)
     self.notifications.where(read: false, user_id: user.id).update_all(read: true)
   end
+
+
+  def events_cached
+    Rails.cache.fetch "groups:#{self.id}:events:#{self.updated_at}" do
+      Event.includes(:user).where(group_id: self.id).limit(50).order(created_at: :desc).reverse
+    end
+  end
 end
