@@ -16,6 +16,9 @@ gem 'mina_hipchat', '0.0.4'
 # Paperclip
 gem 'paperclip', '4.2.0'
 
+# Memcache
+gem 'dalli', '2.7.2'
+
 # AWS
 gem 'aws-sdk', '1.47.0'
 
