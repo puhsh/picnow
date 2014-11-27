@@ -35,6 +35,9 @@ class Group < ActiveRecord::Base
   end
 
 
+  # Public: Gets the events for a group cached in Memcache
+  #
+  # Returns an array of Events
   def events_cached
     Rails.cache.fetch "groups:#{self.id}:events:#{self.updated_at}" do
       Event.includes(:user).where(group_id: self.id).limit(50).order(created_at: :desc).reverse

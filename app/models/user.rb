@@ -72,12 +72,18 @@ class User < ActiveRecord::Base
     self.phone_number.present? && self.verified?
   end
 
+  # Public: Gets a text verification record from Memcache
+  #
+  # Returns a TextVerification
   def text_verification_cache
     Rails.cache.fetch "user:#{self.id}.text_verification:#{self.text_verification.updated_at}" do
       self.text_verification
     end
   end
 
+  # Public Gets an access token record from Memcache
+  #
+  # Returns an AccessToken
   def access_token_cache
     Rails.cache.fetch "user:#{self.id}:access_token:#{self.access_token.id}" do
       self.access_token
