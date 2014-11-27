@@ -72,6 +72,18 @@ class User < ActiveRecord::Base
     self.phone_number.present? && self.verified?
   end
 
+  def text_verification_cache
+    Rails.cache.fetch "user:#{self.id}.text_verification:#{self.text_verification.updated_at}" do
+      self.text_verification
+    end
+  end
+
+  def access_token_cache
+    Rails.cache.fetch "user:#{self.id}:access_token:#{self.access_token.id}" do
+      self.access_token
+    end
+  end
+
 
   # Public: Finds your "friends" on PicNow aka users that are in the same groups you are in
   #

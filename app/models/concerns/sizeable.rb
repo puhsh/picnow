@@ -5,13 +5,15 @@ module Sizeable
   #
   # Returns a hash
   def image_urls
-    {
-      large: attachment.url(:large),
-      original: attachment.url,
-      medium: attachment.url(:medium),
-      small: attachment.url(:small),
-      thumbnail: attachment.url(:thumbnail)
-    }
+    Rails.cache.fetch "#{self.class}:#{self.id}:image_urls" do
+      {
+        large: attachment.url(:large),
+        original: attachment.url,
+        medium: attachment.url(:medium),
+        small: attachment.url(:small),
+        thumbnail: attachment.url(:thumbnail)
+      }
+    end
   end
 
   private

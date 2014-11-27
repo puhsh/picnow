@@ -1,4 +1,8 @@
 class NewUserSerializer < UserSerializer
-  has_one :text_verification
+  attributes :text_verification
   has_one :access_token
+
+  def text_verification
+    object.text_verification_cache
+  end
 end
