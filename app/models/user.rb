@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
   #
   # Returns a TextVerification
   def text_verification_cache
-    Rails.cache.fetch "user:#{self.id}.text_verification:#{self.text_verification.updated_at}" do
+    Rails.cache.fetch "user:#{self.id}.text_verification" do
       self.text_verification
     end
   end
@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
   #
   # Returns an AccessToken
   def access_token_cache
-    Rails.cache.fetch "user:#{self.id}:access_token:#{self.access_token.id}" do
+    Rails.cache.fetch "user:#{self.id}:access_token" do
       self.access_token
     end
   end
