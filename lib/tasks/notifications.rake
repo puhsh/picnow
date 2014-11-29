@@ -9,4 +9,12 @@ namespace :notifications do
     app.connections = 1
     app.save!
   end
+
+  task :install_certs_android => :environment do
+    app = Rpush::Gcm::App.new
+    app.name = "pic_now_#{Rails.env}_android"
+    app.auth_key = "AIzaSyCWKWIqzZwOGBmrhecvZkP0ugel3HqB6us"
+    app.connections = 1
+    app.save!
+  end
 end

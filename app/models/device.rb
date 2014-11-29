@@ -40,11 +40,13 @@ class Device < ActiveRecord::Base
 
   # Protected: Sends a GCM Notification
   #
-  # TODO: Implement when we support Android
-  #
   # Returns an Rpush object
   def send_gcm_notification(message)
-
+    n = Rpush::Gcm::Notification.new
+    n.app = Rpush::Gcm::App.find_by_name("pic_now_#{Rails.env}_android")
+    n.registration_ids = [self.token]
+    n.data = { message: message }
+    n.save!
   end
 
   # Sends an APN notification
