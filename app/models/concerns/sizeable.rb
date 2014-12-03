@@ -5,7 +5,12 @@ module Sizeable
   #
   # Returns a hash
   def image_urls
-    Rails.cache.fetch "#{self.class}:#{self.id}:image_urls" do
+    if self.kind_of?(User)
+      key = "#{self.class}:#{self.id}:#{self.avatar_updated_at}:image_urls" 
+    else
+      key = "#{self.class}:#{self.id}:image_urls" 
+    end
+    Rails.cache.fetch key do
       {
         large: attachment.url(:large),
         original: attachment.url,
