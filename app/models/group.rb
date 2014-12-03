@@ -39,8 +39,8 @@ class Group < ActiveRecord::Base
   #
   # Returns an array of Events
   def events_cached
-    Rails.cache.fetch "groups:#{self.id}:events:#{self.updated_at}" do
+    # Rails.cache.fetch "groups:#{self.id}:events:#{self.updated_at}" do
       Event.includes(:user).where(group_id: self.id).limit(50).order(created_at: :desc).reverse
-    end
+    # end
   end
 end
