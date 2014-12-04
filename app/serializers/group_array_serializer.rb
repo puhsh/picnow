@@ -1,5 +1,5 @@
 class GroupArraySerializer < ActiveModel::Serializer
- attributes :id, :name, :last_photo_sent_at, :created_at, :updated_at, :unread_notifications_count, :admin_id
+ attributes :id, :name, :last_photo_sent_at, :created_at, :updated_at, :unread_notifications_count, :admin_id, :points_enabled
 
   def unread_notifications_count
     if @scope
