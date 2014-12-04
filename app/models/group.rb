@@ -18,7 +18,7 @@ class Group < ActiveRecord::Base
   # Scopes
 
   # Third Party
-  symbolize :group_type, in: { public: 'Public', private: 'Private' }, methods: true, scopes: :shallow
+  symbolize :group_type, in: { public_group: 'Public', private_group: 'Private' }, methods: true, scopes: :shallow
 
   # Methods
   
