@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def ignore_api_browser_request
     if request.subdomain == 'api' 
-      render status: 404
+      redirect_to root_url, subdomain: 'www'
     end
   end
 end
