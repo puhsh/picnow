@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126135051) do
+ActiveRecord::Schema.define(version: 20141204162915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,12 +90,15 @@ ActiveRecord::Schema.define(version: 20141126135051) do
     t.datetime "last_photo_sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name",               default: "", null: false
+    t.string   "name",               default: "",        null: false
     t.integer  "admin_id"
     t.datetime "deleted_at"
+    t.boolean  "points_enabled",     default: true
+    t.string   "group_type",         default: "private"
   end
 
   add_index "groups", ["admin_id"], name: "index_groups_on_admin_id", using: :btree
+  add_index "groups", ["group_type"], name: "index_groups_on_group_type", using: :btree
 
   create_table "invites", force: true do |t|
     t.integer  "user_id"

@@ -2,13 +2,13 @@ class Group < ActiveRecord::Base
   # Relations
   has_many :group_users, dependent: :destroy
   has_many :users, through: :group_users
-  has_many :group_photos
+  has_many :group_photos, dependent: :destroy
   has_many :photos, through: :group_photos
   has_many :comments, dependent: :destroy
   has_many :invites, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  belongs_to :admin, class_name: 'User', foreign_key: 'admin_id'
   has_many :events, dependent: :destroy
+  belongs_to :admin, class_name: 'User', foreign_key: 'admin_id'
 
   # Callbacks
   
@@ -16,7 +16,9 @@ class Group < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 20 }
   
   # Scopes
-  scope :not_deleted, -> { where(deleted_at: nil) }
+
+  # Third Party
+  symbolize :group_type, in: { public: 'Public', private: 'Private' }, methods: true, scopes: :shallow
 
   # Methods
   
@@ -35,12 +37,10 @@ class Group < ActiveRecord::Base
   end
 
 
-  # Public: Gets the events for a group cached in Memcache
+  # Public: Gets the events for a group
   #
   # Returns an array of Events
-  def events_cached
-    # Rails.cache.fetch "groups:#{self.id}:events:#{self.updated_at}" do
-      Event.includes(:user).where(group_id: self.id).limit(50).order(created_at: :desc).reverse
-    # end
+  def recent_events
+    Event.includes(:user).where(group_id: self.id).limit(50).order(created_at: :desc).reverse
   end
 end

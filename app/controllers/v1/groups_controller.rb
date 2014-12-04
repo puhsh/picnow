@@ -3,7 +3,7 @@ class V1::GroupsController < V1::ApiController
 
   def index
     @user = User.find(params[:user_id])
-    @groups = @user.groups.not_deleted.includes(:notifications).where('group_users.deleted_at is null').order('last_photo_sent_at desc nulls last')
+    @groups = @user.groups.includes(:notifications).order('last_photo_sent_at desc nulls last')
     render json: @groups, each_serializer: GroupArraySerializer
   end
 
@@ -26,9 +26,7 @@ class V1::GroupsController < V1::ApiController
   
   def destroy
     @group = Group.find(params[:id])
-    @group.touch(:deleted_at)
-    @group.group_users.update_all(deleted_at: DateTime.now)
-    Notification.where(group_id: @group.id).update_all(read: true)
+    @group.destroy
     render json: @group
   end
 
