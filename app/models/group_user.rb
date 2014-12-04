@@ -11,7 +11,6 @@ class GroupUser < ActiveRecord::Base
   validates :group, presence: true
   
   # Scopes
-  scope :not_deleted, -> { where(deleted_at: nil) }
 
   # Methods
 
