@@ -33,7 +33,7 @@ class V1::GroupsController < V1::ApiController
   protected
 
   def group_params
-    params.require(:group).permit(:name)
+    params.require(:group).permit(:name, :points_enabled)
   end
 
 end
