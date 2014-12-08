@@ -11,8 +11,8 @@ class User < ActiveRecord::Base
   # Relations
   has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
-  has_many :photos, dependent: :nullify
-  has_many :group_photos
+  has_many :photos, dependent: :destroy
+  has_many :group_photos, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :devices, dependent: :destroy
   has_many :invites, dependent: :nullify

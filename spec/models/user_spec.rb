@@ -1,7 +1,17 @@
 require 'spec_helper'
 
 describe User do
-  it { should have_one(:text_verification) }
+  it { should have_many(:groups).through(:group_users) }
+  it { should have_many(:group_users).dependent(:destroy) }
+  it { should have_many(:photos).dependent(:destroy) }
+  it { should have_many(:group_photos).dependent(:destroy) }
+  it { should have_many(:comments).dependent(:destroy) }
+  it { should have_many(:invites).dependent(:nullify) }
+  it { should have_one(:accepted_invite).dependent(:destroy) }
+  it { should have_one(:text_verification).dependent(:destroy) }
+  it { should have_many(:notifications).dependent(:destroy) }
+  it { should have_many(:owned_groups).dependent(:destroy) }
+  it { should have_many(:events).dependent(:destroy) }
 
   let!(:user) { FactoryGirl.build(:user) }
   let!(:user2) { FactoryGirl.build(:user) }
