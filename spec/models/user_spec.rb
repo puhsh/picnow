@@ -168,6 +168,18 @@ describe User do
       expect(invited_user.reload.groups).to include(group)
     end
 
+    it 'adds invited users to the group they were invited to when they create an account and use a different formatted number' do
+      invited_user = FactoryGirl.build(:user, phone_number: '214-555-1234')
+      invited_user.save
+      expect(invited_user.reload.groups).to include(group)
+    end
+
+    it 'adds invited users to the group they were invited to when they create an account and use a different formatted number with +1' do
+      invited_user = FactoryGirl.build(:user, phone_number: '1-214-555-1234')
+      invited_user.save
+      expect(invited_user.reload.groups).to include(group)
+    end
+
     it 'does not invited users to a group if user signs up with a different phone number' do
       invited_user = FactoryGirl.build(:user, phone_number: '12145551236')
       invited_user.save
