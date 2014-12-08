@@ -186,4 +186,45 @@ describe User do
       expect(invited_user.reload.groups).to_not include(group)
     end
   end
+
+  describe '.friends' do
+    before do 
+      user.save
+      user2.save
+    end
+    
+    let!(:group) { FactoryGirl.create(:group, admin: user) }
+    let!(:group_user1_group_1) { FactoryGirl.create(:group_user, group: group, user: user) }
+    let!(:group_user2_group_1) { FactoryGirl.create(:group_user, group: group, user: user2) }
+    let!(:group2) { FactoryGirl.create(:group, admin: user) }
+    let!(:group_user1_group_2) { FactoryGirl.create(:group_user, group: group2, user: user) }
+    let!(:user3) { FactoryGirl.create(:user) }
+
+    it 'returns all your friends that are in any group with you' do
+      expect(user.friends).to include(user2)
+    end
+
+    it 'returns all your friends that are not in a specific group' do
+      expect(user.friends(group2)).to include(user2)
+    end
+
+    it 'does not return friends that are already in the group' do
+      expect(user.friends(group)).to_not include(user2)
+    end
+
+    it 'does not return yourself' do
+      expect(user.friends(group)).to_not include(user)
+      expect(user.friends).to_not include(user)
+    end
+
+    it 'does not return people you aren\'t friends with' do
+      expect(user.friends(group)).to_not include(user3)
+      expect(user.friends).to_not include(user3)
+    end
+
+    it 'does not return duplicates' do
+      FactoryGirl.create(:group_user, group: group2, user: user2)
+      expect(user.reload.friends.size).to eql(1)
+    end
+  end
 end
