@@ -1,4 +1,5 @@
 class GroupPhoto < ActiveRecord::Base
+  include Pointable
   include Eventable
 
   # Relations

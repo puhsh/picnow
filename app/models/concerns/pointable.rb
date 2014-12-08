@@ -2,7 +2,7 @@ module Pointable
   extend ActiveSupport::Concern
 
   included do
-    after_commit :add_point, on: :create
+    after_commit :add_points, on: :create
   end
 
   def reset_points!
@@ -12,6 +12,11 @@ module Pointable
   protected
 
   def add_point
-    self.user.increment(:pic_now_count, 99).save
+    case self
+    when GroupPhoto
+      self.user.increment(:pic_now_count, self.point_value).save
+    when Comment
+      self.user.increment(:pic_now_count, 1).save
+    end
   end
 end

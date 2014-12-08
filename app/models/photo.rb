@@ -1,5 +1,4 @@
 class Photo < ActiveRecord::Base
-  include Pointable
   include Sizeable
 
   # Paperclip
