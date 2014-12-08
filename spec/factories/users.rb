@@ -6,7 +6,7 @@ FactoryGirl.define do
     sequence(:email) { |n| "#{n}@test.local" }
     password '12345678'
     password_confirmation '12345678'
-    sequence(:phone_number) { |n| "#{n}#{n}#{n}-#{n}#{n}#{n}-#{n}#{n}#{n}#{n}"}
+    sequence(:phone_number, (1..9).cycle) { |n| "214-555-#{n - 1}55#{n}#"}
     date_of_birth DateTime.now - 40.years
   end
 end

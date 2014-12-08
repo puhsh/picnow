@@ -118,15 +118,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Deprecated: Always returns true as this is now determined at the group level
+  #
   # Public: Determines if the user should see the progress bar when viewing a group
   #
   # Returns a boolean
   def show_progress_bar?
-    if self.forced_pic_last_sent_at
-      (Time.now - self.forced_pic_last_sent_at) > 5.minutes
-    else
-      true
-    end
+    true
   end
 
   protected

@@ -74,13 +74,86 @@ describe User do
 
   describe '.generate_text_verification!' do
     it 'generates a TextVerification record' do
-      user.generate_text_verification!
+      user.save
       expect(user.reload.text_verification).to_not be_nil
     end
 
     it 'sets a code for a TextVerification record' do
-      user.generate_text_verification!
+      user.save
       expect(user.reload.text_verification.code).to_not be_nil
+    end
+  end
+
+  describe '.generate_access_token!' do
+    it 'generates a AccessToken record' do
+      user.save
+      user.generate_access_token!
+      expect(user.reload.access_token).to_not be_nil
+    end
+  end
+
+  describe '.verified_account?' do
+    it 'returns true if the user is verified and has a phone number' do
+      user.verified = true
+      user.save
+      expect(user).to be_verified_account
+    end
+
+    it 'returns false if the user is verified but does not have phone number' do
+      user.verified = true
+      user.phone_number = nil
+      user.save
+      expect(user).to_not be_verified_account
+    end
+
+    it 'returns false if the user is not verified but have phone number' do
+      user.verified = false
+      user.save
+      expect(user).to_not be_verified_account
+    end
+
+    it 'returns false if the user is not verified and does not have phone number' do
+      user.verified = false
+      user.phone_number = nil
+      user.save
+      expect(user).to_not be_verified_account
+    end
+
+    it 'is false by default' do
+      user.save
+      expect(user).to_not be_verified_account
+    end
+  end
+
+  describe '.show_progress_bar?' do
+    it 'is always true' do
+      user.save
+      expect(user.show_progress_bar?).to be_true
+    end
+  end
+
+  describe '.give_first_point' do
+    it 'gives the user 99 points for uploading their avatar aka their first selfie' do
+      user.save
+      expect(user.reload.pic_now_count).to eql(0)
+      user.avatar_file_name = "test.png"
+      user.save
+      expect(user.reload.pic_now_count).to eql(99)
+    end
+  end
+
+  describe '.text_verification_cache' do
+    it 'returns a TextVerification object, assuming from cache' do
+      user.save
+      expect(user.text_verification_cache).to eql(user.text_verification)
+    end
+  end
+
+  describe '.access_token_cache' do
+    it 'returns a AccessToken object, assuming from cache' do
+      user.save
+      user.generate_access_token!
+      expect(user.access_token_cache).to eql(user.access_token)
     end
   end
 end
