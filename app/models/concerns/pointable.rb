@@ -11,7 +11,7 @@ module Pointable
 
   protected
 
-  def add_point
+  def add_points
     case self
     when GroupPhoto
       self.user.increment(:pic_now_count, self.point_value).save
