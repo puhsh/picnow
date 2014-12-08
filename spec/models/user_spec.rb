@@ -156,4 +156,22 @@ describe User do
       expect(user.access_token_cache).to eql(user.access_token)
     end
   end
+
+  describe '.process_pending_group_invites!' do
+    before { user.save } 
+    let!(:group) { FactoryGirl.create(:group, admin: user) }
+    let!(:invite) { FactoryGirl.create(:invite, user: user, to: '12145551234', group: group) }
+
+    it 'adds invited users to the group they were invited to when they create an account' do
+      invited_user = FactoryGirl.build(:user, phone_number: '12145551234')
+      invited_user.save
+      expect(invited_user.reload.groups).to include(group)
+    end
+
+    it 'does not invited users to a group if user signs up with a different phone number' do
+      invited_user = FactoryGirl.build(:user, phone_number: '12145551236')
+      invited_user.save
+      expect(invited_user.reload.groups).to_not include(group)
+    end
+  end
 end

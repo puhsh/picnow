@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   has_many :events, dependent: :destroy
   
   # Callbacks
-  after_commit :generate_text_verification!, on: :create
+  after_commit :generate_text_verification!, :process_pending_group_invites!, on: :create
   before_save :give_first_point
   
   # Validations
