@@ -3,7 +3,6 @@ class TextVerification < ActiveRecord::Base
   belongs_to :user
   
   # Callbacks
-  before_create :auto_verify
   after_commit :send_verification_code, on: :create
   
   # Validations
@@ -51,8 +50,8 @@ class TextVerification < ActiveRecord::Base
   #
   # Returns a Twilio::REST::Message object
   def send_verification_code
-    if !self.verified?
-      to_phone_number = Rails.env.production? ? self.user.phone_number : Rails.application.secrets[:twilio]['valid_to_phone_number']
+    if !self.verified? && Rails.env.production?
+      to_phone_number = self.user.phone_number       
       self.twilio_client.account.messages.create(
         from: "+#{Rails.application.secrets[:twilio]['phone_number']}",
         to: to_phone_number,
@@ -60,15 +59,6 @@ class TextVerification < ActiveRecord::Base
       )
     else
       true
-    end
-  end
-
-  # Protected: Autoverifies the account for not production environments
-  #
-  # Returns nothing
-  def auto_verify
-    if Rails.env.development?
-      self.confirmed_at = DateTime.now
     end
   end
 end
