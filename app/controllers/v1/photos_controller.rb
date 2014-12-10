@@ -20,12 +20,12 @@ class V1::PhotosController < V1::ApiController
         @group_photo.point_value = params[:point_value] || 99
         @group_photo.group = group
       end
-    else
-      unprocessable_entity!
-    end
 
-    if @photo.save
-      render json: @photo
+      if @photo.save
+        render json: @photo
+      else
+        unprocessable_entity!
+      end
     else
       unprocessable_entity!
     end
