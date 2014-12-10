@@ -23,7 +23,7 @@ class GroupUser < ActiveRecord::Base
     group = self.group
     admin = self.group.admin
     if group && admin
-      self.user.devices.each { |x| x.fire_notification!("#{admin.username} added you to the group #{group.name}", :added_to_group) }
+      self.user.devices.each { |x| x.fire_notification!("#{admin.username} added you to the group #{group.name}", :added_to_group, { group_id: group.id }) }
     end
   end
 end
