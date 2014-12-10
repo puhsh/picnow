@@ -42,5 +42,5 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  get '/:name', to: 'home#index'
+  get '/:name', to: 'home#show'
 end
