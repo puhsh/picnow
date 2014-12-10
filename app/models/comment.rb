@@ -1,6 +1,7 @@
 class Comment < ActiveRecord::Base
   include Pointable
   include Eventable
+  include ActivityIndicatable
 
   # Relations
   belongs_to :user
