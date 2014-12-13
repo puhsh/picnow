@@ -28,7 +28,7 @@ class V1::ApiController < ActionController::Metal
       true
     else
       authenticate_or_request_with_http_token do |token, opts|
-        current_user && token && current_user.access_token_cache.token == token
+        current_user && token && current_user.access_token.token == token
       end
     end
   end
