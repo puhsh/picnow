@@ -56,6 +56,7 @@ gem 'test_after_commit', '0.2.4', group: [:test]
 # Third Party
 gem 'active_model_serializers', '0.9.0.alpha1'
 gem 'haml'
+gem 'logglier'
 gem 'newrelic_rpm'
 gem 'phony_rails', '0.6.2'
 gem 'pry-rails', '0.3.2'

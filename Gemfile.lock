@@ -121,6 +121,7 @@ GEM
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
+    logglier (0.2.11)
     lumberjack (1.0.6)
     lunchy (0.8.0)
     mail (2.6.1)
@@ -272,6 +273,7 @@ DEPENDENCIES
   guard-rspec (= 4.2.10)
   haml
   jquery-rails
+  logglier
   lunchy (= 0.8.0)
   mina (= 0.3.0)
   mina_hipchat (= 0.0.4)
