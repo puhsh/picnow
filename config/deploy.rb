@@ -14,7 +14,7 @@ set :hipchat_rooms, ['Fun Town']
 set :hipchat_from, 'Puhshbot'
 
 task :environment do
-  invoke 'rvm:use[2.1.2@picnow]'
+  invoke 'rvm:use[2.1.5@picnow]'
 end
 
 task :setup => :environment do
