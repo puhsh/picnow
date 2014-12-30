@@ -1,4 +1,5 @@
 namespace :groups do
+  desc 'Populates Group Events'
   task :popluate_events => :environment do
     Event.delete_all
     Group.find_each do |group|

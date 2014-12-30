@@ -1,4 +1,5 @@
 namespace :notifications do
+  desc 'Installs Certs for iOS and RPush'
   task :install_certs => :environment do
     app = Rpush::Apns::App.new
     app.name = "pic_now_#{Rails.env}"
@@ -10,6 +11,7 @@ namespace :notifications do
     app.save!
   end
 
+  desc 'Installs Certs for Android and RPush'
   task :install_certs_android => :environment do
     app = Rpush::Gcm::App.new
     app.name = "pic_now_#{Rails.env}_android"
