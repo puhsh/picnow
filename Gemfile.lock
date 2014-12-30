@@ -29,6 +29,9 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    airbrake (4.1.0)
+      builder
+      multi_json
     arel (5.0.1.20140414130214)
     aws-sdk (1.47.0)
       json (~> 1.4)
@@ -262,6 +265,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (= 0.9.0.alpha1)
+  airbrake
   aws-sdk (= 1.47.0)
   bower-rails
   coffee-rails (~> 4.0.0)

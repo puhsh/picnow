@@ -25,6 +25,9 @@ gem 'aws-sdk', '1.47.0'
 # APN / GCM
 gem 'rpush', '2.2.0', require: true
 
+# Airbrake
+gem "airbrake"
+
 # Assets
 gem 'coffee-rails', '~> 4.0.0'
 gem 'foundation-rails', '5.3.0.1'
