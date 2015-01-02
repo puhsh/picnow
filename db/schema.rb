@@ -89,10 +89,10 @@ ActiveRecord::Schema.define(version: 20141210052650) do
     t.datetime "last_photo_sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name",               default: "",        null: false
+    t.string   "name",               default: "",              null: false
     t.integer  "admin_id"
     t.boolean  "points_enabled",     default: true
-    t.string   "group_type",         default: "private"
+    t.string   "group_type",         default: "private_group"
     t.datetime "last_activity_at"
   end
 
