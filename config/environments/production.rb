@@ -51,7 +51,7 @@ Rails.application.configure do
   config.logger = Syslogger.new("PicNow", Syslog::LOG_PID, Syslog::LOG_LOCAL7)
 
   # Use a different cache store in production.
-  config.cache_store = :dalli_store, 'picnow.fvex8b.cfg.use1.cache.amazonaws.com:11211', { namespace: 'picnow', compress: true, expires: 1.day }
+  config.cache_store = :dalli_store, 'picnow-production.fvex8b.cfg.use1.cache.amazonaws.com:11211', { namespace: 'picnow', compress: true, expires: 1.day }
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
