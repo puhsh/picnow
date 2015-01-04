@@ -113,7 +113,7 @@ class User < ActiveRecord::Base
     invites = Invite.where(to: self.phone_number)
     if invites.any?
       invites.each do |x|
-        GroupUser.create(user_id: self.id, group_id: x.group_id)
+        GroupUser.create(user_id: self.id, group_id: x.group_id) unless GroupUser.where(user_id: self.id, group_id: x.group_id).exists?
       end
     end
   end
