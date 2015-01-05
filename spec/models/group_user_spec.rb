@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe GroupUser do
+  it { should belong_to(:user) }
+  it { should belong_to(:group) }
+
   let!(:user) { FactoryGirl.create(:user) }
   let!(:user2) { FactoryGirl.create(:user) }
   let!(:group) { FactoryGirl.create(:group) }
