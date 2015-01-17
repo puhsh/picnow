@@ -64,6 +64,16 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
+  # Action Mailer
+  config.action_mailer.smtp_settings = {
+    address: 'gorilla@picnow.rocks',
+    authentication: :login,
+    domain: 'picnow.rocks',
+    port: 25,
+    user_name: Rails.application.secrets[:ses]['user_name'],
+    password: Rails.application.secrets[:ses]['password']
+  }
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
