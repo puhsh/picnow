@@ -42,13 +42,13 @@ Rails.application.configure do
   # config.force_ssl = true
 
   # Set to :debug to see everything in the log.
-  config.log_level = :debug
+  config.log_level = :info
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
 
   # Use a different logger for distributed setups.
-  # config.logger = Syslogger.new("PicNow", Syslog::LOG_PID, Syslog::LOG_LOCAL7)
+  config.logger = Syslogger.new("PicNow", Syslog::LOG_PID, Syslog::LOG_LOCAL7)
 
   # Use a different cache store in production.
   config.cache_store = :dalli_store, 'picnow-production.fvex8b.cfg.use1.cache.amazonaws.com:11211', { namespace: 'picnow', compress: true, expires: 1.day }
@@ -65,14 +65,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Action Mailer
-  config.action_mailer.smtp_settings = {
-    address: 'gorilla@picnow.rocks',
-    authentication: :login,
-    domain: 'picnow.rocks',
-    port: 25,
-    user_name: Rails.application.secrets[:ses]['user_name'],
-    password: Rails.application.secrets[:ses]['password']
-  }
+  config.action_mailer.delivery_method = :amazon_ses
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
