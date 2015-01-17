@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   # Scopes
 
   # Devise
-  devise :database_authenticatable, :trackable
+  devise :database_authenticatable, :trackable, :recoverable
 
   # Third Party
   phony_normalize :phone_number, default_country_code: 'US'
