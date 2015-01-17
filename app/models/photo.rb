@@ -25,7 +25,6 @@ class Photo < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: ['image/jpeg', 'image/jpg', 'image/png']
   
   # Scopes
-  default_scope -> { order(created_at: :desc).limit(25) }
   scope :recent, -> { where('photos.created_at >= ?', 1.week.ago) }
   
   # Methods
