@@ -1,6 +1,6 @@
 <div class="row">
   <script>
-    <% if ios_native_request? %>
+    <% if ios_native_request? || ios_safari_request? %>
      window.location= "https://itunes.apple.com/us/app/picnow/id916944872?ls=1&mt=8"
     <% else %>
      window.location= "https://play.google.com/store/apps/details?id=com.puhsh.picnow"
