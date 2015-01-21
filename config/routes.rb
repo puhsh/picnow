@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, skip: [:sessions, :passwords]
+
+  devise_scope :user do
+    get '/password' => 'devise/passwords#new'
+    patch '/password' => 'devise/passwords#update'
+    put '/password' => 'devise/passwords#update'
+  end
 
   # API routes
   namespace :v1 do
@@ -42,5 +48,5 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  get '/:name', to: 'home#show'
+  get '/:name', to: 'home#show', as: 'app_store_redirect'
 end
