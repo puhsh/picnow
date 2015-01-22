@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users, skip: [:sessions, :passwords]
+  devise_for :users, skip: [:sessions, :passwords], controllers: { passwords: 'passwords' }
 
   devise_scope :user do
-    get '/password' => 'devise/passwords#new'
-    patch '/password' => 'devise/passwords#update'
-    put '/password' => 'devise/passwords#update'
+    get '/password/forgot' => 'passwords#new', as: 'new_user_password'
+    get '/password/reset' => 'passwords#edit', as: 'edit_user_password'
+    patch '/password' => 'passwords#update'
+    put '/password' => 'passwords#update'
+    post '/password' => 'passwords#create'
   end
 
   # API routes
