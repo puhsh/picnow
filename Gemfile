@@ -30,7 +30,7 @@ gem "airbrake"
 
 # Assets
 gem 'coffee-rails', '~> 4.0.0'
-gem 'foundation-rails', '5.3.0.1'
+gem 'bootstrap-sass', '~> 3.3.3'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 4.0.3'
 gem 'turbolinks'

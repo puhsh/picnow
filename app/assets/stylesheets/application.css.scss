@@ -1,5 +1,8 @@
-// Modules and Variables
-@import 'partials/base';
-@import "modules/all";
+// Bootstrap Configuration. Needs to be at the top
+@import "partials/base";
 
-@import 'partials/grid';
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@import "partials/grid";
+@import "partials/typography";

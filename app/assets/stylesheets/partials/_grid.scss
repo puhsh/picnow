@@ -1,69 +1,9 @@
-@font-face {
-  font-family: 'MashineRounded';
-  src:
-      asset-url('jaf-mashine-rounded-400.ttf') format('truetype'),
-      asset-url('jaf-mashine-rounded-400.svg#850') format('svg');
-}
 body {
-  background: linear-gradient(
-                rgba(0, 0, 0, 0.5), 
-                rgba(0, 0, 0, 0.5)
-              ), asset-url('gorilla.png') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-div#jumbo {
-  margin-top: 50px;
-  h3 {
-    font-weight: bold;
-    @media #{$medium-only} {
-      font-size: rem-calc(24);
-    }
-    @media #{$small-only} {
-      font-size: rem-calc(12);
-    }
+  &.with-background-cover {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), asset-url('gorilla.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
-}
-
-.logo  {
-  // @media #{$small-only} {
-  //   max-width: 50%;
-  // }
-  // max-width: 70%;
-  width: 100%;
-  height: auto;
-  margin-bottom: 65px;
-  margin-top: 20px;
-}
-
-div#app-download {
-  @media #{$medium-only} {
-    margin-top: 25px;
-  }
-  @media #{$large-only} {
-    margin-top: 75px;
-  }
-  @media #{$xlarge-up} {
-    margin-top: 250px;
-  }
-  img {
-    height: auto;
-    width: 100%;
-  }
-}
-
-.white-button {
-  @include button($padding: rem-calc(22), $bg: white, $radius:10px);
-  font-weight: bold;
-  font-size: 25px;
-  padding-top: 1.7rem;
-  // font-family: 'MashineRounded';
-}
-
-@-webkit-keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
 }
