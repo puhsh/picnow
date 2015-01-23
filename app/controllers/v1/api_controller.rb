@@ -3,11 +3,11 @@ class V1::ApiController < ActionController::Metal
   include ActionView::Layouts
   include ActionController::Serialization
   include ActionController::Rendering
-  include ActionController::Renderers::All  
+  include ActionController::Renderers::All
   include ActionController::Redirecting
   include AbstractController::Callbacks
   include AbstractController::Helpers
-  include ActionController::ParamsWrapper  
+  include ActionController::ParamsWrapper
   include ActionController::MimeResponds
   include ActionController::ImplicitRender
   include ActionController::ForceSSL
@@ -15,13 +15,13 @@ class V1::ApiController < ActionController::Metal
   include Devise::Controllers::Helpers
   include ActionController::RequestForgeryProtection
   include ActionController::StrongParameters
-  include ActionController::Rescue 
+  include ActionController::Rescue
   include ActionController::HttpAuthentication::Token::ControllerMethods
   include Rails.application.routes.url_helpers
 
   before_filter :skip_trackable
 
-  protect_from_forgery with: :null_session, if: :json_request?
+  # protect_from_forgery with: :null_session, if: :json_request?
 
   def verify_access_token
     if bypass_auth?
@@ -32,7 +32,7 @@ class V1::ApiController < ActionController::Metal
       end
     end
   end
-  
+
   # TODO Fully build this out when we start paginating stuff...
   def render_paginated(resource, opts = {})
     render json: resource, root: 'items', meta: {}
