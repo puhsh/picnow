@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       resources :devices, only: [:create]
       resources :text_verifications, only: [:create, :update]
     end
+    resources :passwords, only: [:create]
   end
 
   root to: 'home#index'
