@@ -48,7 +48,7 @@ Rails.application.configure do
   # config.log_tags = [ :subdomain, :uuid ]
 
   # Use a different logger for distributed setups.
-  config.logger = Syslogger.new("PicNow", Syslog::LOG_PID, Syslog::LOG_LOCAL7)
+  config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production.
   config.cache_store = :dalli_store, 'picnow-production.fvex8b.cfg.use1.cache.amazonaws.com:11211', { namespace: 'picnow', compress: true, expires: 1.day }
