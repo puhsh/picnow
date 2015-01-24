@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   # API routes
   namespace :v1 do
+    devise_for :users, only: [:passwords]
     post 'auth', to: 'auth#create'
 
     resources :users, only: [:show, :create, :update] do
