@@ -66,7 +66,6 @@ Rails.application.configure do
 
   # Action Mailer
   config.action_mailer.delivery_method = :ses
-  config.action_mailer.default_url_options = { :host => "my.picnow.rocks" }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -81,7 +80,7 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # Warden 
+  # Warden
   config.gem 'rails_warden'
 
   # Do not dump schema after migrations.
