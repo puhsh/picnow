@@ -283,6 +283,7 @@ DEPENDENCIES
   dalli (= 2.7.2)
   devise (= 3.2.4)
   ember-rails
+  ember-source
   emblem-rails
   factory_girl_rails (= 4.4.1)
   guard-rspec (= 4.2.10)

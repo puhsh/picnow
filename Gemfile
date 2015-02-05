@@ -28,6 +28,10 @@ gem 'rpush', '2.2.0', require: true
 # Airbrake
 gem "airbrake"
 
+# Ember
+gem 'ember-rails'
+gem 'ember-source'
+
 # Assets
 gem 'coffee-rails', '~> 4.0.0'
 gem 'bootstrap-sass', '~> 3.3.3'
@@ -53,7 +57,7 @@ gem 'factory_girl_rails', '4.4.1'
 # Third Party - Development
 gem 'devise', '3.2.4'
 gem 'guard-rspec', '4.2.10', group: :development
-gem 'lunchy', '0.8.0', group: :development 
+gem 'lunchy', '0.8.0', group: :development
 gem 'test_after_commit', '0.2.4', group: [:test]
 
 # Third Party
