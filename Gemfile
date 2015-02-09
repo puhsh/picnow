@@ -23,7 +23,7 @@ gem 'dalli', '2.7.2'
 gem 'aws-sdk', '1.47.0'
 
 # APN / GCM
-gem 'rpush', '2.2.0', require: true
+gem 'rpush', '2.3.2', require: true
 
 # Airbrake
 gem "airbrake"
