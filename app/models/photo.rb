@@ -15,18 +15,18 @@ class Photo < ActiveRecord::Base
   has_many :groups, through: :group_photos
   has_many :events, as: :resource
   has_many :notifications, as: :trigger
-  
+
   # Callbacks
   after_commit :touch_group_last_photo_sent_at
   after_commit :notify_group_users, on: :create
-  
+
   # Validations
   validates :user, presence: true
   validates_attachment_content_type :image, content_type: ['image/jpeg', 'image/jpg', 'image/png']
-  
+
   # Scopes
   scope :recent, -> { where('photos.created_at >= ?', 1.week.ago) }
-  
+
   # Methods
 
   protected
