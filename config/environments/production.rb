@@ -65,7 +65,10 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Action Mailer
-    # config.action_mailer.delivery_method = :ses
+  config.action_mailer.smtp_settings = {
+    address: 'email-smtp.us-east-1.amazonaws.com',
+    port: '25'
+  }
   config.action_mailer.default_url_options = {
     host: 'my.picnow.rocks'
   }
