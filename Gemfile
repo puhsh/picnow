@@ -28,10 +28,6 @@ gem 'rpush', '2.2.0', require: true
 # Airbrake
 gem "airbrake"
 
-# Ember
-gem 'ember-rails'
-gem 'ember-source'
-
 # Assets
 gem 'coffee-rails', '~> 4.0.0'
 gem 'bootstrap-sass', '~> 3.3.3'
