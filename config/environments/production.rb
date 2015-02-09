@@ -66,10 +66,13 @@ Rails.application.configure do
 
   # Action Mailer
     # config.action_mailer.delivery_method = :ses
-    config.action_mailer.default_url_options = {
-      host: 'my.picnow.rocks',
-      from: 'gorilla@picnow.rocks'
-    }
+  config.action_mailer.default_url_options = {
+    host: 'my.picnow.rocks'
+  }
+
+  config.action_mailer.default_options = {
+    from: 'gorilla@picnow.rocks'
+  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
