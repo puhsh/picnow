@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Rails
-gem 'rails', '4.1.6'
+gem 'rails', '4.1.9'
 
 # Postgres
 gem 'pg', '0.17.1'
