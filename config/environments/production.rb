@@ -67,11 +67,12 @@ Rails.application.configure do
   # Action Mailer
   config.action_mailer.smtp_settings = {
     address: 'email-smtp.us-east-1.amazonaws.com',
-    port: '25'
+    port: '25',
     authentication: :login,
     user_name: Rails.application.secrets[:ses]['access_key_id'],
     password: Rails.application.secrets[:ses]['access_key_secret']
   }
+
   config.action_mailer.default_url_options = {
     host: 'my.picnow.rocks'
   }
