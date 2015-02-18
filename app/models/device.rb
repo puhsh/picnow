@@ -8,7 +8,7 @@ class Device < ActiveRecord::Base
   before_create :sanitize_token
 
   # Validations
-  validates :token, presence: true, uniqueness: { scope: :user_id }, allow_nil: true
+  validates :token, presence: true, uniqueness: true, allow_nil: true
 
   # Scopes
 
