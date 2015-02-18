@@ -21,6 +21,16 @@ describe Device do
     end
   end
 
+  describe '.sanitize_token' do
+    let!(:user) { FactoryGirl.create(:user) }
+    let!(:device) { FactoryGirl.build(:device, user: user, brand: :ios, token: 'test 1 2') }
+
+    it 'removes any whitespace before a new device is created' do
+      device.save
+      expect(device.reload.token).to eql('test12')
+    end
+  end
+
   describe '.fire_notification!' do
     let!(:user) { FactoryGirl.create(:user) }
     let!(:iphone) { FactoryGirl.build(:device, user: user, brand: :ios, token: 'test 1 2') }
