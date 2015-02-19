@@ -5,10 +5,11 @@ class Event < ActiveRecord::Base
   belongs_to :user
 
   # Callbacks
-  
+
   # Validations
-  
+
   # Scopes
+  scope :exclude_group_users, -> { where.not(resource_type: 'GroupUser') }
 
   # Methods
 end
