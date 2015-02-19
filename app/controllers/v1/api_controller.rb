@@ -50,7 +50,7 @@ class V1::ApiController < ActionController::Metal
   end
 
   def bypass_auth?
-    Rails.env.development? && params[:debug]
+    (Rails.env.development? && params[:debug]) || Rails.env.test?
   end
 
   def skip_trackable

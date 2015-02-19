@@ -1,15 +1,19 @@
 class GroupUser < ActiveRecord::Base
+  include Eventable
+
   # Relations
   belongs_to :group
   belongs_to :user
+  belongs_to :added_by_user, class_name: 'User', foreign_key: 'added_by_user_id'
 
   # Callbacks
   after_commit :notify_user, on: :create
-  
+  after_destroy :record_event
+
   # Validations
   validates :user, presence: true
   validates :group, presence: true
-  
+
   # Scopes
 
   # Methods

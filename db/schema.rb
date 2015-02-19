@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141210052650) do
+ActiveRecord::Schema.define(version: 20150219173245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,8 +81,10 @@ ActiveRecord::Schema.define(version: 20141210052650) do
     t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "added_by_user_id"
   end
 
+  add_index "group_users", ["added_by_user_id"], name: "index_group_users_on_added_by_user_id", using: :btree
   add_index "group_users", ["user_id", "group_id"], name: "index_group_users_on_user_id_and_group_id", unique: true, using: :btree
 
   create_table "groups", force: true do |t|

@@ -12,6 +12,7 @@ describe User do
   it { should have_many(:notifications).dependent(:destroy) }
   it { should have_many(:owned_groups).dependent(:destroy) }
   it { should have_many(:events).dependent(:destroy) }
+  it { should have_many(:added_group_users).dependent(:nullify) }
 
   let!(:user) { FactoryGirl.build(:user) }
   let!(:user2) { FactoryGirl.build(:user) }
@@ -168,7 +169,7 @@ describe User do
   end
 
   describe '.process_pending_group_invites!' do
-    before { user.save } 
+    before { user.save }
     let!(:group) { FactoryGirl.create(:group, admin: user) }
     let!(:invite) { FactoryGirl.create(:invite, user: user, to: '12145551234', group: group) }
 
@@ -198,11 +199,11 @@ describe User do
   end
 
   describe '.friends' do
-    before do 
+    before do
       user.save
       user2.save
     end
-    
+
     let!(:group) { FactoryGirl.create(:group, admin: user) }
     let!(:group_user1_group_1) { FactoryGirl.create(:group_user, group: group, user: user) }
     let!(:group_user2_group_1) { FactoryGirl.create(:group_user, group: group, user: user2) }

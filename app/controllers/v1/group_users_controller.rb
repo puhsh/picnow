@@ -8,10 +8,11 @@ class V1::GroupUsersController < V1::ApiController
       params[:user_ids].each do |user_id|
         @group_user = @group.group_users.build
         @group_user.user_id = user_id
+        @group_user.added_by_user_id = params[:user_id]
         @group_user.save
         @group_users << @group_user
       end
-    else 
+    else
       @group_user = @group.group_users.build(group_user_params)
       @group_user.save
       @group_users << @group_user
@@ -29,7 +30,7 @@ class V1::GroupUsersController < V1::ApiController
   protected
 
   def group_user_params
-    params.require(:group_user).permit(:user_id, :group_id)
+    params.require(:group_user).permit(:user_id, :group_id, :added_by_user_id)
   end
 
 end

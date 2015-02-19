@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   include Sizeable
-  
+
   has_attached_file :avatar,
                     styles: { large: '1280x1280#', medium: '640x640#', small: '320x320#', thumbnail: '50x50#' },
                     s3_permissions: :public_read,
@@ -22,18 +22,19 @@ class User < ActiveRecord::Base
   has_many :notifications, dependent: :destroy
   has_many :owned_groups, class_name: 'Group', foreign_key: 'admin_id', dependent: :destroy
   has_many :events, dependent: :destroy
-  
+  has_many :added_group_users, class_name: 'GroupUser', foreign_key: 'added_by_user_id', dependent: :nullify
+
   # Callbacks
   after_commit :generate_text_verification!, :process_pending_group_invites!, on: :create
   before_save :give_first_point
-  
+
   # Validations
   validates :username, presence: { message: 'must be legit' }, uniqueness: { message: 'already taken.' }, length: { minimum: 3, message: 'must be at least 3 characters!' }
   validates :email, presence: { message: 'must be legit.' }, uniqueness: { message: 'already taken.' }, format: { with: /@/, message: 'not legit.' }
   validates :phone_number, presence: { message: 'must be legit.' }, uniqueness: { message: 'is already taken.' }
   validates_attachment_content_type :avatar, content_type: ['image/jpeg', 'image/jpg', 'image/png']
 
-  
+
   # Scopes
 
   # Devise
@@ -57,7 +58,7 @@ class User < ActiveRecord::Base
   def generate_access_token!
     AccessToken.create(user: self, token: SecureRandom.hex)
   end
-  
+
   # Public: Generates a text verification for a user
   #
   # Returns a TextVerification
@@ -130,7 +131,7 @@ class User < ActiveRecord::Base
   protected
 
   # Protected: Gives a user their first PicNow point for taking their first selfie
-  # 
+  #
   # Returns true
   def give_first_point
     if self.avatar_file_name_changed? && self.avatar_file_name_was.nil?
